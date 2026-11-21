@@ -1,0 +1,3761 @@
+/* ============ MARCA: colores y tipografía (brandboard) ============ */
+/* =============================================================
+   R+A Inmobiliaria — Colors & Type
+   Source: RyR_Brandboard.pdf · Andrearts Branding Studio · 2026
+   ============================================================= */
+
+/* ---------- Tipografías de marca (documento de agosto 2026) ----------
+   La empresa pidió «letras más sencillas»:
+     LETRA          → Montserrat ExtraBold   (mayúsculas, botones, cifras)
+     LETRA / letra  → Poppins Light          (titulares y texto corrido)
+     Letra          → Alga Light             (cursivas editoriales)
+
+   Raleway y Unbounded quedan fuera. Los archivos son ESTÁTICOS, no
+   variables: cada @font-face declara su peso REAL. Declararlos con un
+   rango 100–900 hacía que el navegador diera por cubierto todo el rango
+   y nunca sintetizara negrita (los botones en bold salían igual de finos).
+   Montserrat se instanció a peso 800 desde el variable oficial y los tres
+   archivos van subconjuntados a latín, así que pesan ~19–89 kB.
+   ---------- */
+@font-face {
+  font-family: "Poppins";
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+  src: url("/fonts/Poppins-Light.woff2") format("woff2"),
+       url("/fonts/Poppins-Light.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Poppins";
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("/fonts/Poppins-Regular.woff2") format("woff2"),
+       url("/fonts/Poppins-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Montserrat";
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+  src: url("/fonts/Montserrat-ExtraBold.woff2") format("woff2"),
+       url("/fonts/Montserrat-ExtraBold.ttf") format("truetype");
+}
+/* Lato Regular 400 + su cursiva. La empresa la señaló con un espécimen del
+   precio de Moratta («262,115») escrito en esta letra: es la voz de las
+   CIFRAS —metraje, dormitorios, precio, años, contadores—, que en Montserrat
+   ExtraBold salían como un ladrillo. Los botones y los rótulos en versalita
+   siguen en Montserrat, que es lo que pidió el documento («botones en
+   negrita»). Ambos archivos van subconjuntados a latín (~100 kB). */
+@font-face {
+  font-family: "Lato";
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("/fonts/Lato-Regular.woff2") format("woff2"),
+       url("/fonts/Lato-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Lato";
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+  src: url("/fonts/Lato-Italic.woff2") format("woff2"),
+       url("/fonts/Lato-Italic.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Alga";
+  font-weight: 200;
+  font-style: italic;
+  font-display: swap;
+  src: url("/fonts/Alga-ExtralightItalic.woff2") format("woff2"),
+       url("/fonts/Alga-ExtralightItalic.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Alga";
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+  src: url("/fonts/Alga-ExtralightItalic.woff2") format("woff2"),
+       url("/fonts/Alga-ExtralightItalic.ttf") format("truetype");
+}
+
+:root {
+  /* -----------------------------------------------------------
+     COLOR — Three core values from the brandboard, plus tints
+     pulled from the photography (warm cream + cool deep blue).
+     ----------------------------------------------------------- */
+
+  /* Primary */
+  /* El documento pidió cambiar el crema por BLANCO puro. Las variantes
+     dejan de ser cálidas y pasan a grises neutros. */
+  --ryr-cream:        #FFFFFF;   /* "color principal" — blanco            */
+  --ryr-ink:          #141413;   /* "color principal" — near-black      */
+
+  /* Secondary */
+  --ryr-graphite:     #3C3C3B;   /* "color secundario" — mid graphite   */
+
+  /* Derived warm-cream scale (for surfaces, hovers, dividers) */
+  --ryr-cream-50:     #FFFFFF;
+  --ryr-cream-100:    #FFFFFF;   /* alias of --ryr-cream                */
+  --ryr-cream-200:    #F5F5F4;
+  --ryr-cream-300:    #E4E4E2;
+  --ryr-cream-400:    #BDBDBD;
+
+  /* Derived graphite/ink scale */
+  --ryr-graphite-300: #A6A6A4;
+  --ryr-graphite-500: #6A6A68;
+  --ryr-graphite-700: #3C3C3B;   /* alias of --ryr-graphite             */
+  --ryr-graphite-900: #262625;
+  --ryr-ink-950:      #141413;   /* alias of --ryr-ink                  */
+
+  /* Editorial accent — Azul Safiro Cielo, con moderación */
+  --ryr-sky:          #53A5E0;
+
+  /* -----------------------------------------------------------
+     DORADO DE MARCA — acento del manual R+A (#C59B43). Se usa en
+     «algunas líneas», nunca como fondo ni como color de texto
+     corrido: rayas finas de las tarjetas, guion de los rótulos de
+     sección, hitos de la línea de tiempo y subrayado del menú.
+     ----------------------------------------------------------- */
+  --ryr-verde:        #C59B43;
+  /* Sobre fondo oscuro el #C59B43 se apaga; esta es su versión legible. */
+  --ryr-verde-claro:  #E0BD6B;
+
+  /* ---- Semantic surface / foreground ---- */
+  --bg:          var(--ryr-cream);
+  --bg-elevated: #FFFFFF;
+  --bg-inverse:  var(--ryr-ink);
+
+  --fg:          var(--ryr-ink);
+  --fg-muted:    var(--ryr-graphite-500);
+  --fg-subtle:   var(--ryr-graphite-300);
+  --fg-inverse:  var(--ryr-cream);
+
+  --border:        var(--ryr-cream-300);
+  --border-strong: var(--ryr-graphite);
+  --rule:          #E6E6E6;
+
+  /* -----------------------------------------------------------
+     TYPE — Four families per brandboard.
+     · Raleway Light       → body, UI, captions
+     · Unbounded Light     → display sans, project marks, eyebrows
+     · "Sharpe" Thin       → serif headings (substitute: Fraunces)
+     · Alga XLight Italic  → editorial italic flourishes (licensed)
+     ----------------------------------------------------------- */
+
+  --font-sans:        "Poppins", "Helvetica Neue", Arial, sans-serif;
+  /* --font-display es la voz en MAYÚSCULAS: eyebrows, botones, rótulos y
+     cifras. Va en Montserrat ExtraBold, que es el único peso cargado: no
+     tiene sentido pedirle 300 porque el navegador usaría igual el de 800.
+     Los rótulos pequeños en versalitas usan --font-sans a peso 400. */
+  --font-display:     "Montserrat", "Helvetica Neue", Arial, sans-serif;
+  /* Los titulares mixtos van en Poppins Light —«LETRA / letra» del
+     documento—; la cursiva editorial sigue siendo Alga, que sí es de marca.
+     El token conserva el nombre histórico --font-serif para no tocar las
+     ~200 reglas que ya lo usan. */
+  --font-serif:       "Poppins", "Helvetica Neue", Arial, sans-serif;
+  --font-serif-ital:  "Alga", Georgia, serif;
+  /* Las CIFRAS. Ver el @font-face de Lato: la empresa la eligió mostrando el
+     precio de Moratta escrito con ella. tabular-nums para que las columnas
+     de metraje y precio de las siete tarjetas queden a plomo. */
+  --font-num:         "Lato", "Helvetica Neue", Arial, sans-serif;
+
+  /* Weight tokens — note: brand strongly favors LIGHT weights */
+  --w-thin:    300;
+  --w-light:   300;
+  --w-regular: 400;
+  --w-medium:  500;
+
+  /* Type scale (modular, 1.25) */
+  --t-12: 0.75rem;
+  --t-14: 0.875rem;
+  --t-16: 1rem;
+  --t-18: 1.125rem;
+  --t-20: 1.25rem;
+  --t-24: 1.5rem;
+  --t-32: 2rem;
+  --t-40: 2.5rem;
+  --t-56: 3.5rem;
+  --t-72: 4.5rem;
+  --t-96: 6rem;
+
+  --lh-tight:   1.05;
+  --lh-snug:    1.2;
+  --lh-normal:  1.5;
+  --lh-loose:   1.7;
+
+  /* Letter-spacing — wide tracking on display caps is a brand tell */
+  --ls-tight:   -0.02em;
+  --ls-normal:  0;
+  --ls-wide:    0.08em;
+  --ls-wider:   0.18em;
+  --ls-widest:  0.32em;
+
+  /* -----------------------------------------------------------
+     SPACING — 4px base, generous on the upper end (luxury = air)
+     ----------------------------------------------------------- */
+  --s-1:  4px;
+  --s-2:  8px;
+  --s-3:  12px;
+  --s-4:  16px;
+  --s-5:  20px;
+  --s-6:  24px;
+  --s-8:  32px;
+  --s-10: 40px;
+  --s-12: 48px;
+  --s-16: 64px;
+  --s-20: 80px;
+  --s-24: 96px;
+  --s-32: 128px;
+  --s-40: 160px;
+
+  /* Radii — kept small. Hexagon mark + architecture = sharp corners */
+  --r-0:    0;
+  --r-sm:   2px;
+  --r-md:   4px;
+  --r-lg:   8px;
+  --r-pill: 999px;
+
+  /* Elevation — extremely soft, warm, never gray */
+  --shadow-xs: 0 1px 0 rgba(20, 20, 19, 0.04);
+  --shadow-sm: 0 1px 2px rgba(20, 20, 19, 0.05), 0 1px 1px rgba(20, 20, 19, 0.03);
+  --shadow-md: 0 6px 18px -8px rgba(20, 20, 19, 0.18);
+  --shadow-lg: 0 24px 60px -24px rgba(20, 20, 19, 0.28);
+
+  /* Motion — slow, gentle, never bouncy */
+  --ease-out:   cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in:    cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast:   180ms;
+  --dur-base:   320ms;
+  --dur-slow:   560ms;
+
+  --grid-max: 1320px;
+  --grid-gutter: var(--s-6);
+
+  /* Tokens adicionales por proyecto (fichas y tarjetas) */
+  --proyecto-safiro-dark: #0D3459;
+  --proyecto-safiro-main: #1867A9;
+  --proyecto-safiro-light: #53A5E0;
+  --proyecto-safiro-muted: #B3BDC6;
+
+  --proyecto-vallereal-main: #6C8D2B;
+  --proyecto-vallereal-accent: #E6B83A;
+
+  --proyecto-terraluz-main: #C39A45;
+  --proyecto-terraluz-dark: #3C3C3B;
+}
+
+/* =============================================================
+   SEMANTIC TYPE — class hooks for headings, body, eyebrows, etc.
+   ============================================================= */
+
+.ryr-eyebrow {
+  font-family: var(--font-sans);
+  font-weight: var(--w-light);
+  font-size: var(--t-12);
+  letter-spacing: var(--ls-widest);
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+
+.ryr-display {
+  font-family: var(--font-serif);
+  font-weight: var(--w-thin);
+  font-size: clamp(2.5rem, 6vw, 5.5rem);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+  color: var(--fg);
+  text-wrap: balance;
+}
+
+.ryr-display em,
+.ryr-italic {
+  font-family: var(--font-serif-ital);
+  font-style: italic;
+  font-weight: var(--w-light);
+}
+
+.ryr-h1 {
+  font-family: var(--font-serif);
+  font-weight: var(--w-thin);
+  font-size: var(--t-56);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+}
+
+.ryr-h2 {
+  font-family: var(--font-serif);
+  font-weight: var(--w-light);
+  font-size: var(--t-40);
+  line-height: var(--lh-snug);
+  letter-spacing: -0.01em;
+}
+
+.ryr-h3 {
+  font-family: var(--font-display);
+  font-weight: var(--w-light);
+  font-size: var(--t-20);
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+}
+
+.ryr-h4 {
+  font-family: var(--font-sans);
+  font-weight: var(--w-medium);
+  font-size: var(--t-16);
+  letter-spacing: var(--ls-wider);
+  text-transform: uppercase;
+}
+
+.ryr-body,
+.ryr-p {
+  font-family: var(--font-sans);
+  font-weight: var(--w-light);
+  font-size: var(--t-16);
+  line-height: var(--lh-loose);
+  color: var(--fg);
+  text-wrap: pretty;
+}
+
+.ryr-lead {
+  font-family: var(--font-sans);
+  font-weight: var(--w-light);
+  font-size: var(--t-20);
+  line-height: var(--lh-normal);
+  color: var(--fg-muted);
+}
+
+.ryr-caption {
+  font-family: var(--font-sans);
+  font-weight: var(--w-light);
+  font-size: var(--t-12);
+  letter-spacing: var(--ls-wide);
+  color: var(--fg-muted);
+}
+
+.ryr-mark {
+  font-family: var(--font-display);
+  font-weight: var(--w-light);
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+}
+
+/* Convenience body defaults — opt-in */
+.ryr-base {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  font-weight: var(--w-light);
+  font-size: var(--t-16);
+  line-height: var(--lh-loose);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============ BASE MONOLITO ============ */
+/* =============================================================
+   OPTION 02 MONOLITO
+   Dark ink. Cream type. Sculptural typography. No rail.
+   ============================================================= */
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--c-bg);
+  color: var(--c-fg);
+  font-family: var(--font-sans);
+  font-weight: var(--w-light);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; cursor: pointer; text-decoration: none; }
+button { font: inherit; cursor: pointer; border: 0; background: transparent; color: inherit; }
+img, svg { display: block; max-width: 100%; }
+input, textarea, select { font: inherit; color: inherit; }
+::selection { background: var(--c-fg); color: var(--c-bg); }
+
+/* =============================================================
+   TEMA — par invertible (decisión de la revisión de julio 2026)
+   --c-fg = tinta del texto · --c-bg = fondo de página.
+   "oscuro" es el monolito original (fondo ink, tipografía crema).
+   "claro" lo invierte, que es lo que pidió R+A ("blanco → negro,
+   negro → blanco"). Ambos quedan montados para comparar; cuando
+   la empresa elija uno se borra el otro.
+   Lo que NO se invierte: los degradados sobre fotos, las placas
+   de planos (línea sobre blanco) y las sombras.
+   ============================================================= */
+:root,
+:root[data-theme="oscuro"] {
+  --c-fg-rgb: 255, 255, 255;
+  --c-bg-rgb: 20, 20, 19;
+  --c-bg-deep: #0e0f0d;
+  --c-bg-raised: #262724;
+  --c-brand-filter: invert(1) brightness(2);
+  /* Los logotipos DE PROYECTO son blancos sobre transparente (así funcionan
+     encima de los renders). Sobre el fondo blanco del tema claro hay que
+     dibujarlos en tinta: de eso se encarga este filtro. El logotipo de R+A
+     ya NO pasa por aquí —tiene hoja verde y el invert la volvería magenta—:
+     va en dos archivos y los cambia el CSS (ver .mo-brand .lk). */
+  --c-logo-filter: none;
+  --c-verde: var(--ryr-verde-claro);
+  --c-shadow: none;
+  color-scheme: dark;
+}
+:root[data-theme="claro"] {
+  --c-fg-rgb: 20, 20, 19;
+  --c-bg-rgb: 255, 255, 255;
+  --c-bg-deep: #F5F5F4;
+  --c-bg-raised: #FFFFFF;
+  --c-brand-filter: none;
+  --c-logo-filter: invert(1);
+  --c-verde: var(--ryr-verde);
+  --c-shadow: 0 18px 48px -28px rgba(20, 20, 19, 0.35);
+  color-scheme: light;
+}
+
+:root {
+  --c-fg: rgb(var(--c-fg-rgb));
+  --c-bg: rgb(var(--c-bg-rgb));
+
+  --max: 1440px;
+  --pad-x: 56px;
+  --mo-line: rgba(var(--c-fg-rgb),0.18);
+  --mo-line-soft: rgba(var(--c-fg-rgb),0.1);
+  --mo-line-muted: rgba(var(--c-fg-rgb),0.5);
+  --mo-text-muted: rgba(var(--c-fg-rgb),0.7);
+  --mo-text-subtle: rgba(var(--c-fg-rgb),0.5);
+}
+/* En claro las hairlines a 0.18 de opacidad casi desaparecen sobre crema:
+   el ojo lee mucho peor una línea oscura clara que una clara sobre oscuro. */
+:root[data-theme="claro"] {
+  --mo-line: rgba(var(--c-fg-rgb),0.14);
+  --mo-line-soft: rgba(var(--c-fg-rgb),0.08);
+  --mo-line-muted: rgba(var(--c-fg-rgb),0.42);
+  --mo-text-muted: rgba(var(--c-fg-rgb),0.66);
+  --mo-text-subtle: rgba(var(--c-fg-rgb),0.5);
+}
+@media (max-width: 880px) { :root { --pad-x: 20px; } }
+
+/* =============================================================
+   UTILITY BAR
+   ============================================================= */
+.mo-util {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 11px var(--pad-x);
+  border-bottom: 1px solid var(--mo-line);
+  font-size: 10px; letter-spacing: 0.32em; text-transform: uppercase;
+  color: var(--mo-text-subtle);
+}
+.mo-util .l, .mo-util .r { display: flex; align-items: center; gap: 18px; }
+.mo-util .r a { color: var(--mo-text-muted); transition: color 200ms; }
+.mo-util .r a:hover { color: var(--c-fg); }
+.mo-util .live {
+  display: inline-block; width: 6px; height: 6px;
+  background: #53A5E0; border-radius: 50%;
+  animation: mo-pulse 2.4s var(--ease-out) infinite;
+  margin-right: 6px;
+}
+@keyframes mo-pulse { 0%, 100% { opacity: 0.85; } 50% { opacity: 0.25; } }
+@media (max-width: 880px) {
+  .mo-util .l { font-size: 9px; }
+  .mo-util .r a:nth-child(n+2) { display: none; }
+}
+
+/* =============================================================
+   NAV
+   ============================================================= */
+.mo-nav {
+  position: sticky; top: 0; z-index: 50;
+  /* relative para el panel del menú móvil, que se ancla al pie de la barra */
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 32px;
+  padding: 22px var(--pad-x);
+  background: rgba(var(--c-bg-rgb), 0.92);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--mo-line);
+}
+.mo-brand {
+  display: flex; align-items: center; gap: 14px;
+  min-width: max-content;
+  flex: 0 0 auto;
+}
+.mo-brand img { height: 38px; width: auto; max-width: none; }
+
+.mo-nav-links {
+  display: flex; justify-content: center; gap: 32px;
+  flex: 0 1 auto;
+}
+.mo-nav-links a {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(var(--c-fg-rgb),0.7);
+  position: relative;
+  padding: 6px 0;
+  white-space: nowrap;
+  transition: color 240ms var(--ease-out);
+}
+.mo-nav-links a:hover { color: var(--c-fg); }
+.mo-nav-links a.is-active { color: var(--c-fg); }
+.mo-nav-links a.is-active::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: -2px;
+  height: 1px; background: var(--c-fg);
+}
+
+.mo-nav-cta { display: flex; align-items: center; gap: 14px; flex: 0 0 auto; }
+
+.mo-btn {
+  /* «Botones en negrita»: van en Montserrat ExtraBold, la voz de las
+     mayúsculas. Con 0.24em de tracking el bold se veía inflado, así que
+     el espaciado baja para compensar el peso. */
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 14px 24px;
+  border: 1px solid var(--c-fg);
+  color: var(--c-fg);
+  background: transparent;
+  transition: all 240ms var(--ease-out);
+  display: inline-flex; align-items: center; gap: 12px;
+  white-space: nowrap;
+}
+.mo-btn:hover { background: var(--c-fg); color: var(--c-bg); }
+.mo-btn--solid {
+  background: var(--c-fg); color: var(--c-bg); border-color: var(--c-fg);
+}
+.mo-btn--solid:hover { background: transparent; color: var(--c-fg); }
+.mo-btn--dark {
+  border-color: var(--c-bg); color: var(--c-bg); background: transparent;
+}
+.mo-btn--dark:hover { background: var(--c-bg); color: var(--c-fg); }
+.mo-btn--solid-dark {
+  background: var(--c-bg); color: var(--c-fg); border-color: var(--c-bg);
+}
+.mo-btn--solid-dark:hover { background: var(--ryr-graphite-900); }
+.mo-btn .arr {
+  width: 16px; height: 1px; background: currentColor;
+  transition: width 240ms var(--ease-out);
+}
+.mo-btn:hover .arr { width: 22px; }
+
+/* ---------- Menú en móvil ----------
+   Debajo de 1100px la barra no tiene sitio para las cuatro secciones:
+   se colapsan en un panel que abre el botón de hamburguesa. */
+.mo-burger { display: none; width: 40px; height: 40px; flex-direction: column; justify-content: center; align-items: center; gap: 5px; border: 1px solid var(--mo-line); }
+.mo-burger span { display: block; width: 17px; height: 1.5px; background: var(--c-fg); transition: transform 240ms var(--ease-out), opacity 180ms; }
+.mo-burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.mo-burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.mo-burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+@media (max-width: 1100px) {
+  .mo-burger { display: flex; }
+  .mo-nav-links {
+    position: absolute; top: 100%; left: 0; right: 0;
+    display: none; flex-direction: column; gap: 0;
+    padding: 8px var(--pad-x) 20px;
+    background: rgba(var(--c-bg-rgb), 0.98);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--mo-line);
+  }
+  .mo-nav-links.is-open { display: flex; }
+  .mo-nav-links a { padding: 15px 0; border-bottom: 1px solid var(--mo-line-soft); font-size: 15px; }
+  .mo-nav-links a:last-child { border-bottom: 0; }
+}
+@media (max-width: 560px) {
+  .mo-nav-cta .mo-btn { display: none; }
+}
+@media (max-width: 720px) {
+  .mo-nav { padding: 16px 20px; gap: 12px; }
+  .mo-brand img { height: 32px; }
+  .mo-nav-cta .mo-btn { padding: 11px 16px; font-size: 10px; }
+}
+
+/* =============================================================
+   PAGE HEAD (Proyectos, Cotizador, Contacto, Central 365)
+   ============================================================= */
+.mo-page-head {
+  max-width: var(--max); margin: 0 auto;
+  padding: 96px var(--pad-x) 56px;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 56px;
+  align-items: end;
+  border-bottom: 1px solid var(--mo-line);
+}
+.mo-page-head .ix { display: flex; flex-direction: column; gap: 12px; padding-bottom: 8px; }
+.mo-page-head .ix .crumb {
+  font-family: var(--font-display);
+  font-size: 10px; letter-spacing: 0.32em; text-transform: uppercase;
+  color: var(--mo-text-subtle);
+  display: flex; align-items: center; gap: 10px;
+}
+.mo-page-head .ix .crumb a { color: var(--mo-text-muted); transition: color 200ms; }
+.mo-page-head .ix .crumb a:hover { color: var(--c-fg); }
+.mo-page-head .ix .crumb .sep { opacity: 0.4; }
+.mo-page-head .ix .num {
+  font-family: var(--font-serif); font-weight: 200;
+  font-size: 60px; line-height: 1; letter-spacing: -0.025em;
+  color: var(--c-fg);
+}
+.mo-page-head .ix .num em { font-family: var(--font-serif-ital); font-style: italic; font-size: 36px; }
+
+.mo-page-head .h-copy { display: flex; flex-direction: column; gap: 16px; }
+.mo-page-head h1 {
+  font-family: var(--font-serif); font-weight: 200;
+  font-size: clamp(56px, 7.2vw, 124px);
+  line-height: 0.92; letter-spacing: -0.034em;
+  margin: 0; color: var(--c-fg); text-wrap: balance;
+}
+.mo-page-head h1 em { font-family: var(--font-serif-ital); font-style: italic; font-weight: 300; }
+.mo-page-head .lead {
+  font-size: 17px; line-height: 1.55; color: var(--mo-text-muted);
+  max-width: 580px; margin: 0;
+}
+@media (max-width: 880px) {
+  .mo-page-head { grid-template-columns: 1fr; gap: 16px; padding: 56px var(--pad-x) 32px; }
+  .mo-page-head .ix .num { font-size: 48px; }
+}
+
+/* =============================================================
+   SECTION BASE
+   ============================================================= */
+.mo-section { max-width: var(--max); margin: 0 auto; padding: 132px var(--pad-x); }
+.mo-section-head {
+  display: flex; flex-direction: column; gap: 16px;
+  margin-bottom: 72px;
+  max-width: 1100px;
+}
+.mo-section-head .idx {
+  font-family: var(--font-display);
+  font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase;
+  color: var(--mo-text-subtle);
+  display: flex; align-items: center; gap: 14px;
+}
+.mo-section-head .idx::before { content: ''; width: 36px; height: 1px; background: var(--mo-text-subtle); }
+.mo-section-head h2 {
+  font-family: var(--font-serif); font-weight: 200;
+  font-size: clamp(40px, 5.4vw, 88px);
+  line-height: 0.96; letter-spacing: -0.028em;
+  margin: 0; color: var(--c-fg);
+  text-wrap: balance;
+}
+.mo-section-head h2 em { font-family: var(--font-serif-ital); font-style: italic; font-weight: 300; }
+.mo-section-head p { font-size: 16px; line-height: 1.55; color: var(--mo-text-muted); max-width: 560px; margin: 0; }
+@media (max-width: 880px) { .mo-section { padding: 80px var(--pad-x); } }
+
+/* =============================================================
+   FOOTER
+   ============================================================= */
+.mo-footer {
+  padding: 80px var(--pad-x) 32px;
+  border-top: 1px solid var(--mo-line);
+}
+.mo-footer-grid {
+  max-width: var(--max); margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.8fr 1fr 1fr 1fr 1fr;
+  gap: 48px;
+}
+.mo-footer-brand { display: flex; flex-direction: column; gap: 18px; }
+/* El lockup oficial es de trazo grueso: a 68 px aplastaba el resto del pie.
+   A 44 px lee como marca y no como titular.
+
+   `align-self: flex-start` NO es cosmético: .mo-footer-brand es un flex en
+   columna y, con el `align-items: stretch` por defecto, la imagen se estiraba
+   a lo ancho de la columna (353 px en vez de 117) y salía deformada. */
+.mo-footer-brand .lock {
+  height: 44px; width: auto;
+  align-self: flex-start;
+  max-width: 100%; object-fit: contain;
+}
+.mo-footer-brand .tag {
+  font-family: var(--font-serif-ital); font-style: italic;
+  font-size: 17px; max-width: 280px;
+  color: var(--mo-text-muted);
+  line-height: 1.4;
+}
+.mo-footer-col { display: flex; flex-direction: column; gap: 12px; padding-top: 8px; }
+.mo-footer-col .h {
+  font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--mo-text-subtle); margin-bottom: 4px;
+}
+.mo-footer-col a { font-size: 13px; color: rgba(var(--c-fg-rgb),0.78); }
+.mo-footer-col a:hover { color: var(--c-fg); }
+.mo-footer-rule {
+  height: 1px; background: var(--mo-line);
+  max-width: var(--max); margin: 56px auto 24px;
+}
+.mo-footer-fine {
+  max-width: var(--max); margin: 0 auto;
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+  font-size: 11px; letter-spacing: 0.06em; color: var(--mo-text-subtle);
+}
+.mo-footer-fine em {
+  font-family: var(--font-serif-ital); font-style: italic;
+  font-size: 14px; color: var(--mo-text-muted);
+}
+@media (max-width: 980px) { .mo-footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; } }
+
+/* =============================================================
+   GENERIC TYPE
+   ============================================================= */
+.italic, em.italic { font-family: var(--font-serif-ital); font-style: italic; font-weight: 300; }
+/* Los eyebrows llevan mayúsculas muy espaciadas: en ExtraBold quedaban
+   como un titular y competían con el h2 que va debajo. Van en Poppins
+   Regular, que es la versión legible de las versalitas pequeñas. */
+.mo-eyebrow {
+  font-family: var(--font-sans); font-weight: 400;
+  font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--mo-text-subtle);
+}
+.mo-hex-bullet {
+  display: inline-block; width: 8px; height: 8px;
+  border: 1px solid currentColor;
+  transform: rotate(45deg);
+  margin: 0 6px;
+  vertical-align: 1px;
+  opacity: 0.6;
+}
+
+/* =============================================================
+   PROPERTY CARD (catalog/home)
+   ============================================================= */
+/* La tarjeta es un <article>, no un <a>: la foto y la ficha son dos enlaces
+   hermanos al mismo proyecto, porque además va el botón «Ver proyecto» y
+   anidar enlaces no es válido. La retícula foto + ficha la monta .mo-card;
+   la versión definitiva está en el bloque de la tercera vuelta, al final. */
+.mo-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 56px 32px; }
+.mo-card { display: flex; flex-direction: column; color: inherit; }
+.mo-card-img {
+  aspect-ratio: 4/5;
+  background-size: cover; background-position: center;
+  position: relative; overflow: hidden;
+}
+.mo-card-img .badge {
+  position: absolute; top: 12px; left: 12px;
+  padding: 5px 11px;
+  background: rgba(var(--c-fg-rgb), 0.92);
+  color: var(--c-bg);
+  font-size: 9px; letter-spacing: 0.26em; text-transform: uppercase;
+  z-index: 2;
+}
+.mo-card-body { display: flex; flex-direction: column; gap: 12px; padding-top: 16px; }
+.mo-card h3 {
+  font-family: var(--font-serif); font-weight: 200;
+  font-size: 44px; line-height: 1; margin: 0;
+  letter-spacing: -0.025em;
+}
+.mo-card h3 em { font-family: var(--font-serif-ital); font-style: italic; font-weight: 300; }
+.mo-card .specs {
+  margin-top: auto;
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 12px; padding-top: 16px;
+  border-top: 1px solid var(--mo-line);
+}
+.mo-card .specs div { display: flex; flex-direction: column; gap: 4px; }
+.mo-card .specs .n { font-family: var(--font-serif); font-weight: 200; font-size: 22px; line-height: 1; }
+.mo-card .specs .l { font-size: 9px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--mo-text-subtle); }
+@media (max-width: 980px) {
+  .mo-cards { grid-template-columns: 1fr; }
+  .mo-card-img { aspect-ratio: 4/3; }
+}
+
+/* ============ HOME (mh-) ============ */
+
+/* CTA */
+.mh-cta {
+  display: grid; grid-template-columns: 1fr 1fr;
+  align-items: stretch;
+  border-top: 1px solid var(--mo-line);
+}
+.mh-cta .left {
+  padding: 128px var(--pad-x);
+  display: flex; flex-direction: column; gap: 24px; justify-content: center;
+  background: var(--c-fg); color: var(--c-bg);
+}
+.mh-cta .left h2 {
+  font-family: var(--font-serif); font-weight: 200;
+  font-size: clamp(48px, 5.4vw, 84px);
+  line-height: 0.96; letter-spacing: -0.03em;
+  margin: 0;
+}
+.mh-cta .left h2 em { font-family: var(--font-serif-ital); font-style: italic; font-weight: 300; }
+.mh-cta .left p { font-size: 17px; max-width: 460px; line-height: 1.55; color: var(--ryr-graphite-700); margin: 0; }
+.mh-cta .left .acts { display: flex; gap: 12px; margin-top: 16px; flex-wrap: wrap; }
+.mh-cta .right {
+  /* Encuadre y repetición por separado, NO con el atajo `background`: el
+     atajo también pone `background-image: none`, y como este selector tiene
+     más peso que la clase `.mo-fondo` —dos partes contra una— le borraba la
+     foto que esa clase elige por ancho de pantalla. */
+  background-position: center; background-size: cover; background-repeat: no-repeat;
+  position: relative; min-height: 520px;
+}
+@media (max-width: 880px) { .mh-cta { grid-template-columns: 1fr; } }
+
+/* ============ PROYECTOS (mp-) ============ */
+
+.mp-controls {
+  max-width: var(--max); margin: 56px auto 0;
+  padding: 0 var(--pad-x);
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+}
+.mp-tabs { display: flex; gap: 4px; padding: 5px; border: 1px solid var(--mo-line); border-radius: 999px; }
+.mp-tabs button {
+  padding: 10px 18px;
+  font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase;
+  color: rgba(var(--c-fg-rgb),0.6);
+  border-radius: 999px;
+  transition: all 240ms var(--ease-out);
+}
+.mp-tabs button:hover { color: var(--c-fg); }
+.mp-tabs button.is-active { background: var(--c-fg); color: var(--c-bg); }
+.mp-count { margin-left: auto; font-family: var(--font-display); font-size: 10px; letter-spacing: 0.32em; color: var(--mo-text-subtle); text-transform: uppercase; }
+
+.mp-grid {
+  max-width: var(--max); margin: 48px auto 0;
+  padding: 0 var(--pad-x) 96px;
+}
+/* ============ CENTRAL 365 (mc-) ============ */
+
+/* ===== CENTRAL 365, MONOLITO ===== */
+.mc-hero {
+  position: relative;
+  min-height: 820px;
+  display: flex; align-items: end;
+  background: center/cover no-repeat;
+  overflow: hidden;
+}
+.mc-hero::after {
+  content: ''; position: absolute; inset: 0;
+  /* El tramo transparente al 30% caía justo donde va el nombre del proyecto:
+     sobre los renders de cielo claro el titular y la ficha no se leían. */
+  background: linear-gradient(180deg, rgba(29,30,28,0.55) 0%, rgba(29,30,28,0.28) 42%, rgba(29,30,28,0.9) 100%);
+}
+.mc-hero-inner {
+  position: relative; z-index: 2;
+  max-width: var(--max); margin: 0 auto;
+  padding: 96px var(--pad-x);
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 32px; align-items: end; width: 100%;
+}
+.mc-hero-l { display: flex; flex-direction: column; gap: 18px; color: var(--c-fg); }
+.mc-hero-eye {
+  display: flex; align-items: center; gap: 14px;
+  font-family: var(--font-display); font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase;
+  color: rgba(var(--c-fg-rgb),0.78);
+}
+.mc-hero h1 {
+  font-family: var(--font-serif); font-weight: 200;
+  font-size: clamp(96px, 12vw, 220px);
+  line-height: 0.85; letter-spacing: -0.04em;
+  margin: 0;
+}
+.mc-hero h1 em { font-family: var(--font-serif-ital); font-style: italic; font-weight: 300; }
+.mc-hero .sub { font-family: var(--font-serif-ital); font-style: italic; font-size: 24px; max-width: 460px; line-height: 1.3; }
+.mc-hero-r {
+  text-align: right;
+  display: flex; flex-direction: column; gap: 18px;
+  border-left: 1px solid rgba(var(--c-fg-rgb),0.22);
+  padding-left: 32px;
+  color: var(--c-fg);
+}
+.mc-hero-r .price {
+  font-family: var(--font-serif); font-weight: 200;
+  font-size: 72px; line-height: 1; letter-spacing: -0.025em;
+}
+.mc-hero-r .price small { font-family: var(--font-sans); font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(var(--c-fg-rgb),0.6); display: block; }
+.mc-hero-r .stat { display: flex; flex-direction: column; gap: 4px; }
+.mc-hero-r .stat .l { font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(var(--c-fg-rgb),0.55); }
+.mc-hero-r .stat .v { font-family: var(--font-serif); font-weight: 200; font-size: 24px; line-height: 1; }
+.mc-hero-r .stat .v em { font-family: var(--font-serif-ital); font-style: italic; font-size: 16px; opacity: 0.8; }
+.mc-hero-foot {
+  position: absolute; bottom: 24px; left: 0; right: 0; z-index: 2;
+  display: flex; justify-content: space-between;
+  padding: 0 var(--pad-x);
+  font-family: var(--font-display);
+  font-size: 10px; letter-spacing: 0.32em; text-transform: uppercase;
+  color: rgba(var(--c-fg-rgb),0.6);
+}
+@media (max-width: 880px) {
+  .mc-hero-inner { grid-template-columns: 1fr; gap: 24px; }
+  .mc-hero-r { border-left: 0; padding-left: 0; text-align: left; }
+}
+
+/* Gallery cinema strip */
+.mc-gallery {
+  display: flex; gap: 16px;
+  padding: 0 var(--pad-x);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+.mc-gallery::-webkit-scrollbar { display: none; }
+.mc-gallery .item {
+  flex: 0 0 auto;
+  width: 480px; height: 600px;
+  position: relative; overflow: hidden;
+  margin: 0;
+  scroll-snap-align: start;
+}
+/* La galería pasó de <div> con background-image a <figure> con <img> para
+   poder cargar perezosamente la imagen completa en vez de la miniatura. */
+.mc-gallery .item > img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  cursor: zoom-in;
+}
+.mc-gallery .item:nth-child(3n) { width: 320px; }
+.mc-gallery .item:nth-child(5n) { width: 600px; }
+/* El velo y el pie van encima de la foto, pero sin comerse el clic: el
+   lightbox escucha en el <img>, que es quien lleva data-full. */
+.mc-gallery .item::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, transparent 60%, rgba(29,30,28,0.6) 100%); }
+.mc-gallery .item .cap {
+  position: absolute; bottom: 18px; left: 18px; right: 18px; z-index: 2;
+  pointer-events: none;
+  display: flex; justify-content: space-between; align-items: baseline;
+  color: var(--c-fg);
+  font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+}
+.mc-gallery .item .cap .num { font-family: var(--font-serif-ital); font-style: italic; font-size: 16px; }
+
+/* CTA */
+.mc-cta { padding: 128px var(--pad-x); border-top: 1px solid var(--mo-line); }
+.mc-cta-inner { max-width: var(--max); margin: 0 auto; display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: end; }
+.mc-cta-inner h2 {
+  font-family: var(--font-serif); font-weight: 200;
+  font-size: clamp(48px, 5.4vw, 88px);
+  line-height: 0.96; letter-spacing: -0.028em;
+  margin: 0; color: var(--c-fg); max-width: 800px;
+}
+.mc-cta-inner h2 em { font-family: var(--font-serif-ital); font-style: italic; font-weight: 300; }
+.mc-cta-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+@media (max-width: 880px) { .mc-cta-inner { grid-template-columns: 1fr; gap: 24px; } }
+
+/* ============ CONTACTO (mk-) ============ */
+
+.mk-body { max-width: var(--max); margin: 0 auto; padding: 64px var(--pad-x) 96px; }
+.mk-row { display: grid; grid-template-columns: 1.3fr 1fr; gap: 64px; align-items: start; }
+.mk-form { display: flex; flex-direction: column; gap: 24px; }
+.mk-field { display: flex; flex-direction: column; gap: 6px; }
+.mk-field .lbl { font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--mo-text-subtle); }
+.mk-field input, .mk-field textarea, .mk-field select {
+  font-family: var(--font-sans); font-weight: 300;
+  font-size: 18px;
+  padding: 12px 0;
+  background: transparent;
+  border: 0; border-bottom: 1px solid var(--mo-line-muted);
+  color: var(--c-fg); outline: none; width: 100%; resize: vertical;
+  transition: border-color 240ms var(--ease-out);
+}
+.mk-field input:focus, .mk-field textarea:focus, .mk-field select:focus { border-color: var(--c-fg); }
+.mk-field input::placeholder, .mk-field textarea::placeholder { color: rgba(var(--c-fg-rgb),0.35); }
+.mk-field select option { background: var(--c-bg); color: var(--c-fg); }
+.mk-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.mk-radio { display: flex; flex-wrap: wrap; gap: 8px; }
+.mk-radio label {
+  padding: 8px 14px;
+  font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+  border: 1px solid var(--mo-line); border-radius: 999px;
+  cursor: pointer; color: rgba(var(--c-fg-rgb),0.65);
+  transition: all 200ms;
+}
+.mk-radio label.is-active { background: var(--c-fg); color: var(--c-bg); border-color: var(--c-fg); }
+.mk-radio input { display: none; }
+.mk-actions { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; padding-top: 8px; }
+.mk-actions .fine { font-size: 11px; color: var(--mo-text-subtle); }
+
+.mk-showroom { display: grid; grid-template-columns: 1fr 1.4fr; gap: 48px; margin-top: 96px; }
+.mk-showroom .info { display: flex; flex-direction: column; gap: 20px; padding-top: 12px; }
+.mk-showroom h3 { font-family: var(--font-serif); font-weight: 200; font-size: 40px; line-height: 1.05; letter-spacing: -0.022em; margin: 0; color: var(--c-fg); }
+.mk-showroom h3 em { font-family: var(--font-serif-ital); font-style: italic; }
+.mk-showroom p { font-size: 15px; color: var(--mo-text-muted); line-height: 1.55; margin: 0; max-width: 380px; }
+.mk-showroom .map { background: var(--c-bg-deep); border: 1px solid var(--mo-line); min-height: 400px; position: relative; overflow: hidden; }
+.mk-showroom .map svg { width: 100%; height: 100%; position: absolute; inset: 0; }
+
+@media (max-width: 980px) { .mk-row { grid-template-columns: 1fr; gap: 32px; } .mk-2col { grid-template-columns: 1fr; } }
+@media (max-width: 880px) { .mk-showroom { grid-template-columns: 1fr; } }
+
+/* ============ UTILIDADES ============ */
+.is-hidden { display: none !important; }
+.skip-link {
+  position: absolute; left: -9999px; top: 0; z-index: 200;
+  padding: 10px 16px; background: var(--c-fg); color: var(--c-bg);
+}
+.skip-link:focus { left: 0; }
+
+/* Franja de vista previa (borrador sin guardar). Fluye con la página:
+   sticky chocaba con el nav sticky (ambos top:0) y lo tapaba. */
+.preview-strip {
+  position: relative; z-index: 90;
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+  padding: 9px 16px;
+  background: #53A5E0; color: var(--c-bg);
+  font-family: var(--font-display); font-size: 10px;
+  letter-spacing: 0.28em; text-transform: uppercase;
+}
+
+/* ============ CAPA DE MOVIMIENTO (motion.js) ============ */
+/* Todo lo que oculta contenido vive SOLO bajo html.has-motion y
+   sobre [data-rv] (atributo puesto por motion.js). Sin JS o con
+   prefers-reduced-motion, nada queda oculto. motion.js retira
+   data-rv + .is-in + transition-delay inline al terminar (contrato §5). */
+
+html.has-motion [data-rv] {
+  opacity: 0;
+  transform: translateY(16px);
+}
+html.has-motion [data-rv].is-in {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 720ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 720ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --- Sticky nav: esconder al bajar, mostrar al subir --- */
+.mo-nav {
+  transition: transform 360ms var(--ease-out), box-shadow 320ms var(--ease-out);
+}
+.mo-nav.nav-hidden { transform: translateY(-110%); }
+.mo-nav.is-scrolled { box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35); }
+
+/* --- Hilo de progreso de lectura (creado por motion.js) --- */
+#read-thread {
+  position: fixed; top: 0; left: 0; z-index: 95;
+  height: 2px; width: 0;
+  background: var(--c-fg);
+  pointer-events: none;
+}
+
+/* --- Lightbox (galería) --- */
+.lb {
+  position: fixed; inset: 0; z-index: 120;
+  background: rgba(var(--c-bg-rgb), 0.96);
+  display: flex; align-items: center; justify-content: center;
+  /* cerrado por defecto: invisible Y sin eventos (contrato §5) */
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity 280ms var(--ease-out), visibility 0s linear 280ms;
+}
+.lb.is-open {
+  opacity: 1; visibility: visible; pointer-events: auto;
+  transition: opacity 280ms var(--ease-out);
+}
+.lb-img {
+  display: block;
+  max-width: 88vw; max-height: 82vh;
+  border: 1px solid rgba(var(--c-fg-rgb), 0.4);
+}
+.lb button {
+  position: absolute;
+  width: 46px; height: 46px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-size: 14px; line-height: 1;
+  color: var(--c-fg);
+  background: transparent;
+  border: 1px solid rgba(var(--c-fg-rgb), 0.45);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 240ms var(--ease-out), border-color 240ms var(--ease-out);
+}
+.lb button:hover { background: rgba(var(--c-fg-rgb), 0.1); border-color: var(--c-fg); }
+.lb-close { top: 24px; right: 24px; }
+.lb-prev { left: 24px; top: 50%; transform: translateY(-50%); }
+.lb-next { right: 24px; top: 50%; transform: translateY(-50%); }
+.lb-count {
+  position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
+  font-family: var(--font-display); font-size: 10px; letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(var(--c-fg-rgb), 0.7);
+}
+body.lb-open { overflow: hidden; }
+
+/* --- View Transitions entre páginas --- */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition { navigation: auto; }
+  ::view-transition-old(root),
+  ::view-transition-new(root) { animation-duration: 280ms; }
+}
+
+/* --- Micro-interacción sutil en tarjetas de proyecto --- */
+.mo-card { transition: opacity 320ms var(--ease-out); }
+/* :not([data-rv]) evita que el dim (0,5,0) pise el estado oculto del
+   reveal (0,2,1): sin él, las tarjetas aún no reveladas aparecían
+   "fantasma" al 82% al hacer hover sobre la grilla. */
+.mo-cards:hover .mo-card:not(:hover):not([data-rv]) { opacity: 0.82; }
+
+/* ============ AJUSTES RESPONSIVE (QA móvil 390px) ============ */
+/* Pestañas de filtro de proyectos: scroll horizontal en pantallas chicas */
+@media (max-width: 640px) {
+  .mp-controls { gap: 16px; }
+  .mp-tabs {
+    max-width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .mp-tabs::-webkit-scrollbar { display: none; }
+  .mp-tabs button { white-space: nowrap; flex: 0 0 auto; }
+}
+/* ============ ARREGLOS REVISIÓN ADVERSARIAL ============ */
+/* Los puntos "live" pulsantes respetan prefers-reduced-motion
+   (las @keyframes de la base quedan fuera del gate has-motion) */
+@media (prefers-reduced-motion: reduce) {
+  .mo-util .live, .mc-hud .live { animation: none; opacity: 0.85; }
+}
+
+/* Impresión: en tema oscuro la página saldría crema sobre papel blanco. */
+@media print {
+  body { background: #fff !important; color: #141413 !important; }
+  .mo-util, .mo-nav, .mo-footer, .lb, #read-thread, .preview-strip,
+  .mh-slider, .skip-link { display: none !important; }
+  input[type=range] { display: none; }
+}
+
+/* ============================================================
+   PROYECTOS REALES (julio 2026) — chips de filtro, detalle de
+   proyecto (pd-), videos y planos. Comparte mc-hero / mc-gallery /
+   mc-cta con la página insignia.
+   ============================================================ */
+
+/* Chips de filtro (galería de renders y planos) — gramática de .mp-tabs */
+.mo-chips {
+  display: inline-flex; gap: 4px; padding: 5px;
+  border: 1px solid var(--mo-line); border-radius: 999px;
+  margin: 0 0 28px;
+  max-width: 100%; overflow-x: auto;
+  scrollbar-width: none; -webkit-overflow-scrolling: touch;
+}
+.mo-chips::-webkit-scrollbar { display: none; }
+.mo-chips button {
+  appearance: none; border: 0; background: transparent;
+  color: var(--mo-text-muted);
+  font-family: var(--font-sans); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 8px 16px; border-radius: 999px;
+  cursor: pointer; white-space: nowrap; flex: 0 0 auto;
+  transition: color 160ms ease, background 160ms ease;
+}
+.mo-chips button:hover { color: var(--c-fg); }
+.mo-chips button.is-active { background: var(--c-fg); color: var(--c-bg); }
+/* En secciones full-bleed (galería/videos) los chips van alineados al ancho máximo */
+.mo-chips-wrap { padding: 0 var(--pad-x); max-width: var(--max); margin: 0 auto; }
+
+/* Hero del detalle: logo del proyecto sobre el titular */
+.pd-hero-logo { height: 44px; width: auto; max-width: 320px; object-fit: contain; align-self: flex-start; opacity: 0.95; }
+.pd-hero .mc-hero-r .stat .v { font-size: 40px; }
+
+/* Ficha técnica: filas editoriales en dos columnas */
+.pd-ficha { display: grid; grid-template-columns: 1fr 1fr; gap: 0 64px; }
+.pd-ficha-row {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 24px;
+  padding: 18px 0; border-bottom: 1px solid var(--mo-line);
+}
+.pd-ficha-row .l { font-family: var(--font-display); font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--mo-text-subtle); }
+.pd-ficha-row .v { font-family: var(--font-serif); font-weight: 200; font-size: 22px; line-height: 1.15; color: var(--c-fg); text-align: right; }
+.pd-maps-link {
+  display: inline-block; margin-top: 28px;
+  color: var(--c-fg); font-size: 13px; letter-spacing: 0.08em; text-decoration: none;
+  border-bottom: 1px solid var(--mo-line-muted); padding-bottom: 3px;
+}
+.pd-maps-link:hover { border-color: var(--c-fg); }
+@media (max-width: 880px) {
+  .pd-ficha { grid-template-columns: 1fr; }
+  .pd-ficha-row .v { font-size: 18px; }
+}
+
+/* Aspectos relevantes */
+.pd-high { border-top: 1px solid var(--mo-line); }
+.pd-high-row {
+  display: grid; grid-template-columns: 88px 1fr; gap: 24px;
+  padding: 20px 0; border-bottom: 1px solid var(--mo-line); align-items: baseline;
+}
+.pd-high-row .n { font-family: var(--font-serif-ital); font-style: italic; font-weight: 300; font-size: 24px; color: var(--mo-text-subtle); }
+.pd-high-row .t { font-size: 16px; line-height: 1.5; color: var(--c-fg); }
+
+/* Logo del proyecto en la tarjeta del catálogo */
+.mo-card-logo {
+  position: absolute; left: 14px; bottom: 12px; z-index: 2;
+  height: 22px; width: auto; max-width: 60%; object-fit: contain;
+  opacity: 0.92; filter: drop-shadow(0 1px 6px rgba(0,0,0,0.35));
+}
+
+/* ============ ARREGLOS REVISIÓN ADVERSARIAL v2 ============ */
+/* El eyebrow del hero puede traer zona + estado + entrega: que envuelva */
+.mc-hero-eye { flex-wrap: wrap; row-gap: 6px; }
+/* Nombres largos de proyecto ("Cascanueces") en el hero del detalle:
+   el clamp de la insignia (mín. 96px) desborda en 390px */
+@media (max-width: 640px) {
+  .pd-hero h1 { font-size: clamp(44px, 15vw, 96px); overflow-wrap: break-word; }
+}
+
+/* =============================================================
+   REVISIÓN JULIO 2026 — observaciones de R+A
+   ============================================================= */
+
+/* ---------- Botón de tema (nav) ----------
+   Los dos temas conviven para que la empresa compare; cuando elijan uno
+   se borra el otro y este botón se va con él. */
+.mo-tema {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px;
+  border: 1px solid var(--mo-line);
+  color: var(--c-fg);
+  transition: border-color 240ms var(--ease-out), background 240ms var(--ease-out);
+  flex: 0 0 auto;
+}
+.mo-tema:hover { border-color: var(--c-fg); background: rgba(var(--c-fg-rgb), 0.06); }
+.mo-tema .ic { position: relative; width: 15px; height: 15px; }
+.mo-tema .ic-sol::before {
+  content: ''; position: absolute; inset: 3px;
+  border: 1.5px solid currentColor; border-radius: 50%;
+}
+.mo-tema .ic-sol::after {
+  content: ''; position: absolute; inset: -1px;
+  background:
+    linear-gradient(currentColor, currentColor) center top / 1.5px 3px no-repeat,
+    linear-gradient(currentColor, currentColor) center bottom / 1.5px 3px no-repeat,
+    linear-gradient(currentColor, currentColor) left center / 3px 1.5px no-repeat,
+    linear-gradient(currentColor, currentColor) right center / 3px 1.5px no-repeat;
+}
+.mo-tema .ic-luna::before {
+  content: ''; position: absolute; inset: 1px;
+  border: 1.5px solid currentColor; border-radius: 50%;
+}
+.mo-tema .ic-luna::after {
+  content: ''; position: absolute; top: -2px; right: -6px; width: 14px; height: 19px;
+  background: var(--c-bg); border-radius: 50%;
+}
+/* Se muestra el icono del tema al que se va a cambiar, no el actual. */
+:root[data-theme="claro"] .mo-tema .ic-sol,
+:root[data-theme="oscuro"] .mo-tema .ic-luna { display: none; }
+
+/* ---------- Footer · respaldos institucionales (CAPECO y CôDIP) ---------- */
+.mo-footer-avales {
+  display: flex; align-items: center; gap: 26px; flex-wrap: wrap;
+  padding: 26px var(--pad-x);
+}
+.mo-footer-avales .lbl {
+  font-family: var(--font-display);
+  font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--mo-text-subtle);
+}
+/* El archivo es blanco puro sobre transparente (255,255,255 + alfa), igual
+   que el logotipo: se deja tal cual en oscuro y se entinta en claro.
+   Antes usaba --c-brand-filter, que en tema oscuro lo invertía a NEGRO y lo
+   dejaba invisible sobre el fondo tinta. */
+.mo-footer-avales img { height: 26px; width: auto; opacity: 0.85; filter: var(--c-logo-filter); }
+:root[data-theme="claro"] .mo-footer-avales img { opacity: 0.7; }
+@media (max-width: 720px) {
+  .mo-footer-avales { gap: 16px; padding: 22px 20px; }
+  .mo-footer-avales img { height: 20px; }
+}
+
+/* ---------- WhatsApp flotante ----------
+   Verde de marca de WhatsApp: es un logo de terceros, no sigue el tema. */
+.mo-wpp {
+  position: fixed; right: 22px; bottom: 22px; z-index: 60;
+  display: flex; align-items: center; justify-content: center;
+  width: 56px; height: 56px; border-radius: 50%;
+  background: #25D366; color: #FFFFFF;
+  box-shadow: 0 10px 30px -10px rgba(20, 20, 19, 0.6);
+  transition: transform 240ms var(--ease-out), box-shadow 240ms var(--ease-out);
+}
+.mo-wpp svg { width: 30px; height: 30px; fill: currentColor; }
+.mo-wpp:hover { transform: translateY(-3px); box-shadow: 0 16px 36px -12px rgba(20, 20, 19, 0.7); }
+@media (max-width: 720px) {
+  .mo-wpp { right: 16px; bottom: 16px; width: 50px; height: 50px; }
+  .mo-wpp svg { width: 27px; height: 27px; }
+}
+@media print { .mo-wpp, .mo-tema { display: none; } }
+
+/* ---------- Texto sobre fotografía ----------
+   Estos bloques llevan un degradado oscuro encima del render para que se
+   lea el texto. El degradado NO se invierte (una foto es una foto), así
+   que la tipografía tiene que seguir siendo blanca en los dos temas: si
+   heredara el tema claro quedaría tinta oscura sobre la parte oscura.
+   Se redefine el par local completo —no solo --c-fg-rgb— porque --c-fg
+   se resuelve en :root y los descendientes heredan el valor ya sustituido. */
+.mh-slide,
+.mc-hero,
+.qs-hero,
+.mk-hero-panel,
+.mc-gallery .item,
+.pd-carrusel-item {
+  --c-fg-rgb: 255, 255, 255;
+  --c-bg-rgb: 20, 20, 19;
+  --c-fg: #FFFFFF;
+  --c-bg: #141413;
+  --mo-line: rgba(255, 255, 255, 0.18);
+  --mo-line-soft: rgba(255, 255, 255, 0.1);
+  --mo-line-muted: rgba(255, 255, 255, 0.5);
+  --mo-text-muted: rgba(255, 255, 255, 0.72);
+  --mo-text-subtle: rgba(255, 255, 255, 0.55);
+}
+
+/* ---------- Inicio: cabecera de la grilla de proyectos ---------- */
+.mh-proyectos { padding: 96px 0 0; scroll-margin-top: 80px; }
+.mh-proyectos-head {
+  max-width: var(--max); margin: 0 auto 40px; padding: 0 var(--pad-x);
+  display: flex; flex-direction: column; gap: 14px;
+}
+.mh-proyectos-head h2 {
+  font-family: var(--font-serif); font-weight: 200;
+  font-size: clamp(38px, 4.4vw, 64px); line-height: 1.02; letter-spacing: -0.026em;
+  margin: 0; color: var(--c-fg);
+}
+.mh-proyectos-head h2 em { font-family: var(--font-serif-ital); font-style: italic; font-weight: 300; }
+.mh-proyectos-head p { margin: 0; color: var(--mo-text-muted); max-width: 560px; font-size: 16px; line-height: 1.55; }
+@media (max-width: 720px) { .mh-proyectos { padding-top: 64px; } }
+
+/* ---------- Tarjetas de proyecto (revisión) ----------
+   Dirección arriba del nombre, precio con etiqueta, tres datos siempre
+   presentes y un pie con "Ver proyecto" + brochure. La tarjeta ya no es
+   un <a> entero porque el brochure es un enlace aparte. */
+.mo-card-loc {
+  font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--mo-text-subtle); line-height: 1.4;
+}
+.mo-card-acts {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 14px; padding-top: 14px;
+  border-top: 1px solid var(--mo-line);
+}
+.mo-card-go {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--font-display); font-weight: 800;
+  font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--c-fg);
+}
+.mo-card-go .arr { width: 16px; height: 1px; background: currentColor; transition: width 240ms var(--ease-out); }
+.mo-card:hover .mo-card-go .arr { width: 24px; }
+/* ---------- Google Maps ----------
+   Embed por consulta (sin API key). El iframe trae su propio fondo claro,
+   así que no hereda el tema; solo el marco lo hace. */
+.mo-mapa { display: grid; grid-template-columns: 1.6fr 1fr; gap: 20px; }
+.mo-mapa--solo { grid-template-columns: 1fr; margin-top: 32px; }
+.mo-mapa-frame {
+  position: relative; min-height: 420px;
+  border: 1px solid var(--mo-line); overflow: hidden;
+}
+.mo-mapa-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.mk-showroom .map iframe { width: 100%; height: 100%; min-height: 400px; border: 0; display: block; }
+@media (max-width: 980px) {
+  .mo-mapa { grid-template-columns: 1fr; }
+  .mo-mapa-frame { min-height: 320px; }
+}
+
+/* ---------- Detalle: bajada del docx bajo el nombre ---------- */
+.pd-hero-tagline {
+  margin: 10px 0 0;
+  font-family: var(--font-serif-ital); font-style: italic;
+  font-size: clamp(18px, 2vw, 24px); line-height: 1.3;
+  color: rgba(var(--c-fg-rgb), 0.9); max-width: 620px;
+}
+
+/* ---------- Sub-menú de proyecto (referencia Skyline del documento) ----------
+   Se pega JUSTO DEBAJO de la barra principal y ahí se queda todo el scroll.
+   El --nav-h lo mide site.js: con top:0 el sub-menú se metía debajo del
+   header (que tiene más z-index) y desaparecía apenas bajabas.
+   El fallback de 92 px es el alto del header en escritorio, para que sin JS
+   el menú siga quedando en su sitio. */
+.pd-sub {
+  position: sticky; top: var(--nav-h, 92px); z-index: 40;
+  background: var(--c-bg);
+  border-bottom: 1px solid var(--mo-line);
+  box-shadow: 0 1px 0 rgba(var(--c-fg-rgb), 0.06), 0 10px 24px -22px rgba(20, 20, 19, 0.7);
+  /* Acompaña al header: mismo tiempo y misma curva que su translateY. */
+  transition: top 360ms var(--ease-out);
+}
+/* Al bajar, el header se retira (.nav-hidden) y el sub-menú ocupa su lugar
+   arriba del todo; al subir, vuelve a acomodarse debajo. El sub-menú vive
+   dentro de <main>, que es hermano del header. */
+.mo-nav.nav-hidden ~ #main .pd-sub { top: 0; }
+.pd-sub-inner {
+  max-width: var(--max); margin: 0 auto;
+  padding: 0 var(--pad-x);
+  display: flex; align-items: center; gap: 34px;
+  overflow-x: auto; scrollbar-width: none;
+}
+.pd-sub-inner::-webkit-scrollbar { display: none; }
+.pd-sub a {
+  flex: 0 0 auto;
+  padding: 18px 0;
+  font-family: var(--font-display); font-weight: 800;
+  font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--mo-text-muted);
+  border-bottom: 2px solid transparent;
+  transition: color 200ms, border-color 200ms;
+}
+.pd-sub a:hover { color: var(--c-fg); }
+.pd-sub a.is-active { color: var(--c-fg); border-bottom-color: var(--c-fg); }
+/* Las secciones tienen que frenar por debajo de las DOS barras pegajosas. */
+#areas-comunes, #informacion, #ubicacion, #galeria, #planos {
+  scroll-margin-top: calc(var(--nav-h, 92px) + var(--sub-h, 56px) + 12px);
+}
+@media (max-width: 720px) {
+  .pd-sub-inner { gap: 22px; padding: 0 20px; }
+  .pd-sub a { padding: 14px 0; font-size: 10px; }
+}
+
+/* ---------- Información: el bloque del documento junto a la ficha ---------- */
+.pd-info { display: grid; grid-template-columns: 1.25fr 1fr; gap: 56px; align-items: start; }
+.pd-info-l { display: flex; flex-direction: column; gap: 20px; }
+.pd-info-tagline {
+  margin: 0;
+  font-family: var(--font-serif); font-weight: 200;
+  font-size: clamp(24px, 2.6vw, 34px); line-height: 1.2; letter-spacing: -0.02em;
+  color: var(--c-fg);
+}
+.pd-info-texto { margin: 0; color: var(--mo-text-muted); line-height: 1.7; max-width: 62ch; }
+
+/* Las cuatro líneas con los mismos rótulos del documento */
+.pd-doc { margin: 8px 0 0; display: flex; flex-direction: column; }
+.pd-doc > div {
+  display: grid; grid-template-columns: 130px 1fr; gap: 18px; align-items: baseline;
+  padding: 14px 0; border-top: 1px solid var(--mo-line);
+}
+.pd-doc dt {
+  font-family: var(--font-display); font-weight: 300;
+  font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--mo-text-subtle);
+}
+.pd-doc dd { margin: 0; font-size: 17px; line-height: 1.4; color: var(--c-fg); }
+@media (max-width: 980px) {
+  .pd-info { grid-template-columns: 1fr; gap: 40px; }
+}
+@media (max-width: 520px) {
+  .pd-doc > div { grid-template-columns: 1fr; gap: 4px; }
+}
+
+
+
+/* =============================================================
+   REDISEÑO AGOSTO 2026 — documento "PÁGINA WEB CAMBIOS"
+   Tipografía nueva, blanco puro, inicio como transición entre
+   proyectos, detalle reordenado, quiénes somos y contacto.
+   ============================================================= */
+
+/* ---------- Ajuste fino de la voz tipográfica ----------
+   --font-display solo tiene cargado el peso 800 (Montserrat ExtraBold):
+   cualquier regla que lo use rinde en ExtraBold, dé el font-weight que
+   dé. Eso es lo que se quiere en botones, menú y cifras; en los rótulos
+   diminutos con mucho tracking resulta ilegible, así que esos pasan a
+   Poppins Regular. */
+.mo-nav-links a { font-family: var(--font-display); font-weight: 800; letter-spacing: 0.12em; font-size: 14px; }
+.mo-page-head .ix .crumb,
+.mo-section-head .idx,
+.mo-card .specs .l,
+.mo-card-img .badge,
+.mo-card-loc,
+.mo-util,
+.mo-footer-col .h,
+.mo-footer-avales .lbl,
+.mo-footer-fine,
+.pd-ficha-row .l,
+.pd-doc dt,
+.mc-hero-eye,
+.mo-chips button,
+.mk-field .lbl,
+.mp-count,
+.mp-tabs button,
+.mk-radio label,
+.lb-count {
+  font-family: var(--font-sans); font-weight: 400;
+}
+/* Las cifras grandes sí van en ExtraBold: es la lámina que mandó la empresa. */
+.mo-page-head .ix .num { font-family: var(--font-display); font-weight: 800; font-size: 44px; letter-spacing: -0.01em; }
+.mo-page-head .ix .num em { font-family: var(--font-serif-ital); font-weight: 300; font-size: 30px; }
+
+/* Poppins Light tiene una caja mucho más estrecha que el serif anterior:
+   sin subir el tamaño los titulares quedaban pequeños en su hueco. */
+.mo-page-head h1 { font-size: clamp(46px, 6vw, 96px); line-height: 0.98; letter-spacing: -0.03em; }
+.mo-section-head h2 { font-size: clamp(34px, 4.4vw, 68px); line-height: 1.02; letter-spacing: -0.025em; }
+
+/* ---------- Utilidad: bloquear el scroll del fondo ---------- */
+html.sin-scroll, html.sin-scroll body { overflow: hidden; }
+
+/* Secciones a sangre con la cabecera alineada al ancho máximo */
+.mo-section--full { max-width: none; padding-left: 0; padding-right: 0; }
+.mo-section-head--full { padding: 0 var(--pad-x); max-width: var(--max); margin-left: auto; margin-right: auto; }
+
+/* =============================================================
+   INICIO · transición entre proyectos
+   Cada lámina es el render a sangre; el degradado nace en el fondo
+   de página por el lado del texto y se apaga sobre la foto, así el
+   nombre se lee sobre cualquier render (cielo claro incluido).
+   ============================================================= */
+.mh-slider {
+  position: relative;
+  min-height: 86vh; min-height: 86svh;
+  overflow: hidden; isolation: isolate;
+  background: var(--c-bg-deep);
+}
+.mh-slider-stage { position: absolute; inset: 0; }
+.mh-slide {
+  position: absolute; inset: 0;
+  display: flex; align-items: flex-end;
+  opacity: 0; visibility: hidden;
+  transition: opacity 900ms var(--ease-out), visibility 0s linear 900ms;
+}
+.mh-slide.is-active {
+  opacity: 1; visibility: visible;
+  transition: opacity 900ms var(--ease-out);
+}
+.mh-slide-img {
+  position: absolute; inset: 0; z-index: -2;
+  width: 100%; height: 100%;
+  /* Los renders traen mucho cielo sobre el edificio y la portada arrancaba
+     en un campo azul vacío. Se recorta en dos tramos, cada uno en su terreno:
+
+     1) `object-position` mueve la ventana de recorte hacia abajo. Es
+        PROPORCIONAL a lo que sobra, que es justo lo que hace falta: un
+        porcentaje fijo de píxeles queda corto en un monitor ancho y se pasa
+        en uno pequeño. Con el 11% la corona cae entre 50 y 95 px del borde
+        en todo el rango de 1280 a 2000.
+     2) Ese mecanismo no puede hacer nada cuando la ventana es MÁS ALTA que
+        el render (0,9): ahí `cover` escala por el alto, enseña la foto
+        entera y no sobra nada que desplazar. Solo en ese caso se agranda la
+        lámina, anclada abajo, para que el cielo se salga por arriba. */
+  object-fit: cover; object-position: 50% 17%;
+  transform: scale(1.045);
+  transition: transform 9s linear;
+}
+.mh-slide.is-active .mh-slide-img { transform: scale(1); }
+@media (max-aspect-ratio: 9 / 10) {
+  .mh-slide-img { top: auto; bottom: 0; height: var(--portada-alto, 108%); }
+}
+.mh-slide-veil {
+  position: absolute; inset: 0; z-index: -1;
+  /* Lo justo para que se lean el nombre y la cabecera transparente: el
+     render tiene que verse, no quedar apagado detrás de una cortina. */
+  background:
+    linear-gradient(100deg, rgba(12,13,11,0.72) 0%, rgba(12,13,11,0.42) 32%, rgba(12,13,11,0.04) 60%, transparent 76%),
+    linear-gradient(180deg, rgba(12,13,11,0.42) 0%, transparent 26%, rgba(12,13,11,0.58) 100%);
+}
+.mh-slide-copy {
+  position: relative;
+  width: 100%; max-width: var(--max); margin: 0 auto;
+  padding: 120px var(--pad-x) 132px;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 18px;
+  color: var(--c-fg);
+}
+.mh-slide-eyebrow {
+  display: flex; align-items: center; gap: 12px;
+  font-family: var(--font-sans); font-weight: 400;
+  font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
+  color: rgba(var(--c-fg-rgb), 0.78);
+}
+.mh-slide-eyebrow .n { font-family: var(--font-display); font-weight: 800; letter-spacing: 0.06em; }
+.mh-slide-eyebrow .sep { width: 26px; height: 1px; background: rgba(var(--c-fg-rgb), 0.55); }
+.mh-slide-name {
+  margin: 0;
+  font-family: var(--font-serif); font-weight: 300;
+  font-size: clamp(58px, 9vw, 148px);
+  line-height: 0.9; letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+.mh-slide-name em { font-family: var(--font-serif-ital); font-style: italic; font-weight: 300; }
+/* Con logotipo el h2 deja de ser texto: la caja la manda la imagen. */
+.mh-slide-name--marca { line-height: 0; }
+.mh-slide-name--marca img {
+  display: block;
+  height: clamp(58px, 8vw, 116px); width: auto;
+  max-width: min(540px, 74vw); object-fit: contain; object-position: left center;
+}
+.mh-slide-tag {
+  margin: 0; max-width: 30ch;
+  font-family: var(--font-serif-ital); font-style: italic;
+  font-size: clamp(18px, 2.2vw, 26px); line-height: 1.35;
+  color: rgba(var(--c-fg-rgb), 0.92);
+}
+.mh-slide-dir {
+  margin: 0;
+  font-size: 13px; letter-spacing: 0.06em; line-height: 1.45;
+  color: rgba(var(--c-fg-rgb), 0.72); max-width: 40ch;
+}
+.mh-slide-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 10px; }
+
+/* Controles: viven fuera de las láminas para no fundirse con ellas. */
+.mh-slider-ui {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 3;
+  max-width: var(--max); margin: 0 auto;
+  /* El botón flotante de WhatsApp vive abajo a la derecha: los controles
+     dejan ese hueco libre para no quedar debajo. */
+  padding: 0 calc(var(--pad-x) + 68px) 26px var(--pad-x);
+  display: flex; align-items: center; gap: 14px;
+  color: #FFFFFF;
+}
+.mh-slider-arrow, .mh-slider-pausa {
+  flex: 0 0 auto;
+  width: 40px; height: 40px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 1px solid rgba(255,255,255,0.4); color: #FFFFFF;
+  background: rgba(12,13,11,0.28);
+  transition: background 220ms var(--ease-out), border-color 220ms var(--ease-out);
+}
+.mh-slider-arrow:hover, .mh-slider-pausa:hover { background: rgba(255,255,255,0.18); border-color: #FFFFFF; }
+.mh-slider-arrow svg { width: 17px; height: 17px; }
+.mh-slider-dots {
+  list-style: none; margin: 0; padding: 0;
+  display: flex; gap: 6px; flex: 1 1 auto;
+  overflow-x: auto; scrollbar-width: none;
+}
+.mh-slider-dots::-webkit-scrollbar { display: none; }
+.mh-slider-dots li { flex: 1 1 0; min-width: 78px; }
+.mh-slider-dots button {
+  width: 100%; text-align: left;
+  display: flex; flex-direction: column; gap: 7px;
+  padding: 8px 0 0; color: rgba(255,255,255,0.62);
+  transition: color 220ms var(--ease-out);
+}
+.mh-slider-dots button:hover { color: #FFFFFF; }
+.mh-slider-dots .lbl {
+  font-family: var(--font-sans); font-weight: 400;
+  font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.mh-slider-dots .bar { display: block; height: 2px; background: rgba(255,255,255,0.26); overflow: hidden; }
+.mh-slider-dots .bar > i { display: block; height: 100%; width: 0; background: #FFFFFF; }
+.mh-slider-dots li.is-active button { color: #FFFFFF; }
+.mh-slider-dots li.is-active .bar { background: rgba(255,255,255,0.4); }
+/* La barra se llena en el tiempo del intervalo; JS relanza la animación
+   quitando y volviendo a poner .is-run (si no, no reinicia). */
+@keyframes mh-barra { from { width: 0; } to { width: 100%; } }
+.mh-slider-dots .bar > i.is-run { animation: mh-barra var(--slider-dur, 6500ms) linear forwards; }
+/* Con la transición pausada la barra se queda quieta pero visible. */
+.mh-slider-dots li.is-active .bar > i:not(.is-run) { width: 100%; opacity: 0.5; }
+.mh-slider-pausa .ic { width: 12px; height: 12px; position: relative; }
+.mh-slider-pausa .ic-pausa::before,
+.mh-slider-pausa .ic-pausa::after {
+  content: ''; position: absolute; top: 0; bottom: 0; width: 3px; background: currentColor;
+}
+.mh-slider-pausa .ic-pausa::before { left: 1px; }
+.mh-slider-pausa .ic-pausa::after { right: 1px; }
+.mh-slider-pausa .ic-play::before {
+  content: ''; position: absolute; top: 0; left: 2px;
+  border-left: 10px solid currentColor;
+  border-top: 6px solid transparent; border-bottom: 6px solid transparent;
+}
+.mh-slider-pausa .ic-play { display: none; }
+.mh-slider-pausa.is-paused .ic-pausa { display: none; }
+.mh-slider-pausa.is-paused .ic-play { display: block; }
+.mh-slider-scroll {
+  position: absolute; right: var(--pad-x); top: 50%; z-index: 3;
+  transform: translateY(-50%) rotate(90deg); transform-origin: right center;
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--font-sans); font-weight: 400;
+  font-size: 9px; letter-spacing: 0.34em; text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+}
+.mh-slider-scroll .tick { width: 30px; height: 1px; background: rgba(255,255,255,0.6); }
+@media (max-width: 980px) {
+  .mh-slider { min-height: 78svh; }
+  .mh-slide-copy { padding: 96px var(--pad-x) 150px; }
+  .mh-slide-veil {
+    background:
+      linear-gradient(180deg, rgba(12,13,11,0.5) 0%, rgba(12,13,11,0.14) 26%, rgba(12,13,11,0.82) 100%);
+  }
+  .mh-slider-scroll { display: none; }
+  .mh-slider-dots li { min-width: 54px; }
+  .mh-slider-dots .lbl { display: none; }
+  .mh-slider-dots .bar { height: 3px; }
+}
+@media (max-width: 560px) {
+  .mh-slider-ui { gap: 8px; padding-bottom: 18px; }
+  .mh-slider-arrow, .mh-slider-pausa { width: 34px; height: 34px; }
+}
+
+/* ---------- Inicio: pieza de lanzamiento ---------- */
+/* OJO: `display: flex` gana sobre el `display: none` que el navegador aplica
+   al atributo [hidden]. Sin la primera regla, la capa quedaba invisible
+   (opacity 0) pero tapando la pantalla entera y se comía TODOS los clics del
+   inicio —flechas de la transición, tarjetas, menú— para cualquiera que ya
+   hubiera cerrado la pieza. Misma trampa que la del lightbox (contrato §5.2):
+   cerrado = visibility + pointer-events, no solo opacidad. */
+.mh-launch[hidden] { display: none; }
+.mh-launch {
+  position: fixed; inset: 0; z-index: 130;
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px;
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity 320ms var(--ease-out), visibility 0s linear 320ms;
+}
+.mh-launch.is-open {
+  opacity: 1; visibility: visible; pointer-events: auto;
+  transition: opacity 320ms var(--ease-out);
+}
+.mh-launch-back { position: absolute; inset: 0; background: rgba(12,13,11,0.78); }
+.mh-launch-card {
+  position: relative; z-index: 2;
+  width: min(420px, 100%);
+  background: var(--c-bg); color: var(--c-fg);
+  border: 1px solid var(--mo-line);
+  box-shadow: 0 40px 90px -40px rgba(0,0,0,0.7);
+  transform: translateY(14px) scale(0.98);
+  transition: transform 420ms var(--ease-out);
+  max-height: calc(100svh - 48px); overflow: auto;
+}
+.mh-launch.is-open .mh-launch-card { transform: none; }
+.mh-launch-img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; display: block; }
+.mh-launch-body {
+  padding: 26px 28px 30px;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 12px;
+}
+.mh-launch-logo { height: 40px; width: auto; max-width: 72%; object-fit: contain; }
+.mh-launch-title {
+  margin: 0; font-family: var(--font-serif); font-weight: 300;
+  font-size: 44px; line-height: 1; letter-spacing: -0.03em;
+}
+.mh-launch-sub { margin: 0; font-size: 13px; color: var(--mo-text-muted); letter-spacing: 0.04em; }
+.mh-launch-kicker {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+  padding: 7px 12px; background: var(--c-fg); color: var(--c-bg);
+}
+.mh-launch-x {
+  position: absolute; top: 10px; right: 10px; z-index: 3;
+  width: 38px; height: 38px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: rgba(12,13,11,0.55); color: #FFFFFF; border-radius: 50%;
+}
+.mh-launch-x svg { width: 16px; height: 16px; }
+.mh-launch-x:hover { background: rgba(12,13,11,0.8); }
+@media (prefers-reduced-motion: reduce) {
+  .mh-launch, .mh-launch-card { transition: none; }
+}
+
+/* =============================================================
+   TARJETA DE PROYECTO — estructura del documento
+   ============================================================= */
+/* «Cambiar el color a uno más oscuro para mayor visibilidad»: la dirección
+   deja de ir en gris suave y pasa a tinta plena. */
+.mo-card-loc {
+  font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: rgba(var(--c-fg-rgb), 0.88); line-height: 1.45; font-weight: 400;
+}
+.mo-card h3 { font-family: var(--font-serif); font-weight: 300; font-size: 40px; letter-spacing: -0.03em; }
+.mo-card .specs { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.mo-card .specs .n {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: 17px; line-height: 1.15; letter-spacing: -0.01em;
+  overflow-wrap: anywhere;
+}
+.mo-card .specs .n .u {
+  font-family: var(--font-sans); font-weight: 400;
+  font-size: 11px; letter-spacing: 0.06em; color: var(--mo-text-muted);
+}
+.mo-card .specs .l { font-size: 8.5px; letter-spacing: 0.2em; }
+.mo-card-acts { justify-content: flex-start; }
+@media (max-width: 420px) {
+  .mo-card .specs { grid-template-columns: 1fr; gap: 12px; }
+}
+
+/* =============================================================
+   /PROYECTOS · línea de tiempo de obras entregadas
+   Los nombres SON los logos: cada ficha es la lámina de la empresa
+   recortada (blanco sobre transparente), sobre fondo tinta.
+   ============================================================= */
+.mp-tray {
+  background: var(--ryr-ink); color: #FFFFFF;
+  padding: 104px 0 88px;
+  scroll-margin-top: calc(var(--nav-h, 92px) + 12px);
+}
+.mp-tray-head {
+  max-width: var(--max); margin: 0 auto 56px; padding: 0 var(--pad-x);
+  display: flex; flex-direction: column; gap: 14px;
+}
+.mp-tray-head .mo-eyebrow { color: rgba(255,255,255,0.55); }
+.mp-tray-head h2 {
+  margin: 0; font-family: var(--font-display); font-weight: 800;
+  font-size: clamp(26px, 3.4vw, 46px); line-height: 1.12; letter-spacing: 0.01em;
+  text-transform: uppercase; color: #FFFFFF; text-wrap: balance;
+}
+.mp-tray-head h2 em {
+  font-family: var(--font-serif-ital); font-style: italic; font-weight: 300;
+  text-transform: none; letter-spacing: -0.01em;
+}
+.mp-tray-head p { margin: 0; color: rgba(255,255,255,0.62); font-size: 15px; }
+.mp-tray-scroll {
+  overflow-x: auto; padding: 0 var(--pad-x) 18px;
+  scrollbar-width: thin;
+}
+.mp-tray-linea {
+  list-style: none; margin: 0; padding: 0;
+  display: flex; align-items: stretch; gap: 0;
+  min-width: min-content;
+}
+.mp-tray-item {
+  flex: 0 0 auto; width: 186px;
+  display: flex; flex-direction: column; gap: 0;
+  padding: 0 8px;
+}
+.mp-tray-item .obra {
+  flex: 1 1 auto; min-height: 220px;
+  display: flex; align-items: flex-end; justify-content: center;
+  padding-bottom: 18px;
+}
+.mp-tray-item .obra img { max-width: 100%; max-height: 220px; width: auto; height: auto; object-fit: contain; }
+.mp-tray-item .obra-txt {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: 16px; letter-spacing: 0.06em; text-transform: uppercase; text-align: center;
+}
+/* La línea del tiempo: el trazo continuo lo dibuja el ::before de cada
+   ficha, así crece con el número de obras sin un elemento aparte. */
+.mp-tray-item .marca {
+  position: relative;
+  display: flex; flex-direction: column; align-items: center; gap: 9px;
+  padding: 14px 0 16px;
+}
+.mp-tray-item .marca::before {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 20px;
+  height: 1px; background: rgba(255,255,255,0.28);
+}
+.mp-tray-item:first-child .marca::before { left: 50%; }
+.mp-tray-item:last-child .marca::before { right: 50%; }
+.mp-tray-item .anio {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: 15px; letter-spacing: 0.04em; color: #FFFFFF;
+}
+.mp-tray-item .punto {
+  position: relative; z-index: 2;
+  width: 9px; height: 9px; border-radius: 50%;
+  background: var(--ryr-ink); border: 1.5px solid #FFFFFF;
+}
+.mp-tray-item .pie {
+  display: flex; flex-direction: column; gap: 5px; align-items: center; text-align: center;
+  padding: 0 2px;
+}
+.mp-tray-item .pie .nm {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #FFFFFF;
+}
+.mp-tray-item .pie .dir {
+  font-size: 10.5px; line-height: 1.45; color: rgba(255,255,255,0.58);
+}
+.mp-tray-vacio { max-width: var(--max); margin: 0 auto; padding: 0 var(--pad-x); color: rgba(255,255,255,0.6); font-style: italic; }
+@media (max-width: 720px) {
+  .mp-tray { padding: 72px 0 64px; }
+  .mp-tray-item { width: 152px; }
+  .mp-tray-item .obra { min-height: 160px; }
+  .mp-tray-item .obra img { max-height: 160px; }
+}
+
+/* =============================================================
+   DETALLE · 1 · carrusel de áreas comunes
+   ============================================================= */
+.pd-areas { padding: 96px 0 0; scroll-margin-top: calc(var(--nav-h, 92px) + var(--sub-h, 56px) + 12px); }
+.pd-areas-head { padding: 0 var(--pad-x); max-width: var(--max); margin: 0 auto 40px; }
+.pd-carrusel { position: relative; }
+.pd-carrusel-pista {
+  display: flex; gap: 0;
+  overflow-x: auto; scroll-snap-type: x mandatory;
+  scrollbar-width: none; -webkit-overflow-scrolling: touch;
+}
+.pd-carrusel-pista::-webkit-scrollbar { display: none; }
+.pd-carrusel-item {
+  flex: 0 0 100%; margin: 0; position: relative;
+  scroll-snap-align: start;
+  aspect-ratio: 16 / 9;
+}
+.pd-carrusel-item > img {
+  width: 100%; height: 100%; object-fit: cover; display: block; cursor: zoom-in;
+}
+.pd-carrusel-item::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg, transparent 55%, rgba(12,13,11,0.72) 100%);
+}
+.pd-carrusel-item .cap {
+  position: absolute; left: var(--pad-x); bottom: 34px; z-index: 2;
+  pointer-events: none; color: #FFFFFF;
+}
+.pd-carrusel-item .cap .nm {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: clamp(18px, 2.4vw, 30px); letter-spacing: 0.01em;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.45);
+}
+.pd-carrusel-arrow {
+  position: absolute; top: 50%; transform: translateY(-50%); z-index: 3;
+  width: 52px; height: 52px;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: #FFFFFF; background: rgba(12,13,11,0.34);
+  border: 1px solid rgba(255,255,255,0.34);
+  transition: background 220ms var(--ease-out), opacity 220ms;
+}
+.pd-carrusel-arrow:hover { background: rgba(12,13,11,0.62); border-color: #FFFFFF; }
+.pd-carrusel-arrow[disabled] { opacity: 0.28; cursor: default; }
+.pd-carrusel-arrow svg { width: 20px; height: 20px; }
+.pd-carrusel-arrow.prev { left: 18px; }
+.pd-carrusel-arrow.next { right: 18px; }
+.pd-carrusel-cuenta {
+  position: absolute; right: var(--pad-x); bottom: 34px; z-index: 3;
+  display: flex; align-items: baseline; gap: 4px;
+  font-family: var(--font-display); font-weight: 800;
+  font-size: 13px; letter-spacing: 0.08em; color: #FFFFFF;
+  text-shadow: 0 2px 16px rgba(0,0,0,0.5);
+}
+.pd-carrusel-cuenta .s, .pd-carrusel-cuenta .t { opacity: 0.6; font-size: 11px; }
+@media (max-width: 720px) {
+  .pd-areas { padding-top: 64px; }
+  .pd-carrusel-item { aspect-ratio: 4 / 3; }
+  .pd-carrusel-arrow { width: 40px; height: 40px; }
+  .pd-carrusel-arrow.prev { left: 10px; }
+  .pd-carrusel-arrow.next { right: 10px; }
+  .pd-carrusel-item .cap { left: 20px; bottom: 22px; }
+  .pd-carrusel-cuenta { right: 20px; bottom: 22px; }
+}
+
+/* ---------- Barra de datos bajo el carrusel ---------- */
+.pd-barra {
+  max-width: var(--max); margin: 0 auto; padding: 26px var(--pad-x);
+  display: flex; align-items: center; gap: 28px; flex-wrap: wrap;
+  border-bottom: 1px solid var(--mo-line);
+}
+.pd-barra-doc {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 14px 22px;
+  background: var(--c-fg); color: var(--c-bg);
+  font-family: var(--font-display); font-weight: 800;
+  font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+  transition: opacity 200ms;
+}
+.pd-barra-doc:hover { opacity: 0.85; }
+.pd-barra-doc svg { width: 16px; height: 16px; fill: currentColor; }
+.pd-barra-datos {
+  display: flex; gap: 40px; flex-wrap: wrap; margin-left: auto;
+}
+.pd-barra-datos > div { display: flex; flex-direction: column; gap: 4px; }
+.pd-barra-datos .l {
+  font-family: var(--font-sans); font-weight: 400;
+  font-size: 9.5px; letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--mo-text-subtle);
+}
+.pd-barra-datos .v { font-family: var(--font-display); font-weight: 800; font-size: 17px; letter-spacing: -0.005em; }
+@media (max-width: 720px) {
+  .pd-barra { gap: 20px; }
+  .pd-barra-datos { gap: 22px; margin-left: 0; width: 100%; }
+  .pd-barra-doc { width: 100%; justify-content: center; }
+}
+
+/* ---------- Información y aspectos ---------- */
+.pd-info-tagline { font-family: var(--font-serif); font-weight: 300; }
+.pd-high { margin-top: 12px; }
+.pd-high-h {
+  font-family: var(--font-sans); font-weight: 400;
+  font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--mo-text-subtle); padding-bottom: 10px;
+}
+.pd-high-row { grid-template-columns: 56px 1fr; gap: 16px; }
+.pd-high-row .n { font-size: 18px; }
+.pd-high-row .t { font-size: 15px; }
+
+/* ---------- Ubicación ---------- */
+.pd-ubicacion { display: grid; grid-template-columns: 340px 1fr; gap: 48px; align-items: start; }
+.pd-ubicacion-txt { display: flex; flex-direction: column; gap: 12px; }
+.pd-ubicacion-txt .dir {
+  margin: 0;
+  font-family: var(--font-serif); font-weight: 300;
+  font-size: clamp(20px, 2.2vw, 28px); line-height: 1.3; letter-spacing: -0.02em;
+  color: var(--c-fg);
+}
+.pd-ubicacion-txt .zona {
+  margin: 0; font-family: var(--font-sans); font-weight: 400;
+  font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--mo-text-subtle);
+}
+.pd-ubicacion .mo-mapa--solo { margin-top: 0; }
+.pd-ubicacion .pd-maps-link { margin-top: 8px; align-self: flex-start; }
+@media (max-width: 880px) { .pd-ubicacion { grid-template-columns: 1fr; gap: 28px; } }
+
+/* =============================================================
+   DETALLE · 5 · visor de planos (estructura del brochure)
+   ============================================================= */
+.pd-visor { display: flex; flex-direction: column; }
+.pd-visor-marco {
+  display: grid; grid-template-columns: 268px 1fr;
+  border: 1px solid var(--mo-line);
+  background: #FFFFFF;
+}
+/* La ficha y el plano son línea sobre blanco: se quedan claros en los dos
+   temas, como las placas de planos del contrato. */
+.pd-visor-ficha {
+  padding: 30px 26px;
+  display: flex; flex-direction: column; gap: 18px;
+  border-right: 1px solid rgba(29,30,28,0.12);
+  color: var(--ryr-ink);
+}
+.pd-visor-ficha .lg { height: 34px; width: auto; max-width: 74%; object-fit: contain; filter: invert(1); opacity: 0.85; }
+/* Los rótulos de plano van de «Tipo 01» a «Estacionamientos»: sin permitir
+   el corte, los largos se salían de la ficha. */
+.pd-visor-ficha .tipo {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: clamp(18px, 1.5vw, 26px); line-height: 1.1;
+  letter-spacing: 0.01em; text-transform: uppercase;
+  overflow-wrap: anywhere; hyphens: auto;
+  padding-top: 14px; border-top: 1px solid rgba(29,30,28,0.12);
+}
+/* Un plano de nivel o de sótano no tiene área ni dormitorios: en vez de tres
+   guiones sueltos, esas filas y la cinta entera desaparecen. */
+.pd-visor-ficha dl > div.is-empty,
+.pd-visor-cinta > div.is-empty,
+.pd-visor-cinta.is-empty { display: none; }
+.pd-visor-ficha dl { margin: 0; display: flex; flex-direction: column; gap: 14px; }
+.pd-visor-ficha dl > div { display: flex; flex-direction: column; gap: 2px; }
+.pd-visor-ficha dt {
+  font-family: var(--font-sans); font-weight: 400;
+  font-size: 9.5px; letter-spacing: 0.24em; text-transform: uppercase;
+  color: rgba(29,30,28,0.5);
+}
+.pd-visor-ficha dd { margin: 0; font-family: var(--font-serif); font-weight: 300; font-size: 21px; line-height: 1.1; }
+.pd-visor-ficha .nota { margin-top: auto; font-size: 11px; line-height: 1.45; color: rgba(29,30,28,0.55); }
+.pd-visor-lienzo {
+  position: relative; background: #FFFFFF;
+  display: flex; align-items: center; justify-content: center;
+  min-height: 420px; padding: 26px 64px;
+}
+.pd-visor-lienzo img {
+  max-width: 100%; max-height: 520px; width: auto; height: auto;
+  object-fit: contain; cursor: zoom-in;
+  transition: opacity 180ms var(--ease-out);
+}
+.pd-visor-lienzo img.is-swap { opacity: 0; }
+.pd-visor-arrow, .pd-visor-zoom {
+  position: absolute; z-index: 2;
+  width: 42px; height: 42px;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--ryr-ink); background: rgba(255,255,255,0.9);
+  border: 1px solid rgba(29,30,28,0.16);
+  transition: background 200ms, border-color 200ms;
+}
+.pd-visor-arrow:hover, .pd-visor-zoom:hover { background: var(--ryr-ink); color: #FFFFFF; border-color: var(--ryr-ink); }
+.pd-visor-arrow svg, .pd-visor-zoom svg { width: 18px; height: 18px; }
+.pd-visor-arrow.prev { left: 12px; top: 50%; transform: translateY(-50%); }
+.pd-visor-arrow.next { right: 12px; top: 50%; transform: translateY(-50%); }
+.pd-visor-zoom { right: 12px; bottom: 12px; }
+/* Cinta oscura de datos, igual que en el brochure */
+.pd-visor-cinta {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 24px; padding: 22px 26px;
+  background: var(--ryr-ink); color: #FFFFFF;
+}
+.pd-visor-cinta > div { display: flex; flex-direction: column; gap: 4px; }
+.pd-visor-cinta .l {
+  font-family: var(--font-sans); font-weight: 400;
+  font-size: 9.5px; letter-spacing: 0.24em; text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+}
+.pd-visor-cinta .v { font-family: var(--font-display); font-weight: 800; font-size: 20px; }
+.pd-visor-tira {
+  list-style: none; margin: 20px 0 0; padding: 0 0 10px;
+  display: flex; gap: 10px;
+  overflow-x: auto; scrollbar-width: thin;
+}
+.pd-visor-tira li { flex: 0 0 auto; }
+.pd-visor-tirai {
+  display: flex; flex-direction: column; gap: 6px; width: 116px;
+  padding: 8px; border: 1px solid var(--mo-line);
+  transition: border-color 200ms, background 200ms;
+}
+.pd-visor-tirai img { width: 100%; aspect-ratio: 4 / 3; object-fit: contain; background: #FFFFFF; }
+.pd-visor-tirai .nm {
+  font-family: var(--font-sans); font-weight: 400;
+  font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--mo-text-muted); text-align: center;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.pd-visor-tirai:hover { border-color: var(--mo-line-muted); }
+.pd-visor-tirai.is-active { border-color: var(--c-fg); background: rgba(var(--c-fg-rgb), 0.06); }
+.pd-visor-tirai.is-active .nm { color: var(--c-fg); }
+@media (max-width: 980px) {
+  .pd-visor-marco { grid-template-columns: 1fr; }
+  .pd-visor-ficha { border-right: 0; border-bottom: 1px solid rgba(29,30,28,0.12); }
+  .pd-visor-ficha dl { flex-direction: row; gap: 26px; flex-wrap: wrap; }
+  .pd-visor-lienzo { min-height: 320px; padding: 20px 56px; }
+}
+@media (max-width: 560px) {
+  .pd-visor-cinta { grid-template-columns: 1fr 1fr; gap: 14px; padding: 16px 18px; }
+  .pd-visor-tirai { width: 92px; }
+}
+
+/* =============================================================
+   QUIÉNES SOMOS
+   ============================================================= */
+.qs-hero {
+  position: relative; overflow: hidden;
+  background: center/cover no-repeat;
+  min-height: 62svh;
+  display: flex; align-items: flex-end;
+}
+.qs-hero-veil {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(12,13,11,0.55) 0%, rgba(12,13,11,0.25) 40%, rgba(12,13,11,0.9) 100%);
+}
+.qs-hero-inner {
+  position: relative; z-index: 2;
+  max-width: var(--max); margin: 0 auto; width: 100%;
+  padding: 120px var(--pad-x) 64px;
+  display: flex; flex-direction: column; gap: 16px; color: var(--c-fg);
+}
+.qs-hero .crumb {
+  font-family: var(--font-sans); font-weight: 400;
+  font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
+  color: rgba(var(--c-fg-rgb), 0.7);
+  display: flex; align-items: center; gap: 10px;
+}
+.qs-hero h1 {
+  margin: 0; font-family: var(--font-display); font-weight: 800;
+  font-size: clamp(40px, 6.4vw, 96px); line-height: 1; letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+.qs-hero h1 em {
+  font-family: var(--font-serif-ital); font-style: italic; font-weight: 300;
+  text-transform: none; letter-spacing: -0.02em;
+}
+.qs-hero .lead { margin: 0; max-width: 62ch; font-size: 17px; line-height: 1.6; color: rgba(var(--c-fg-rgb), 0.86); }
+
+.qs-avales {
+  max-width: var(--max); margin: 0 auto; padding: 72px var(--pad-x);
+  display: flex; flex-direction: column; gap: 18px; align-items: flex-start;
+  border-bottom: 1px solid var(--mo-line);
+}
+.qs-avales p { margin: 0; color: var(--mo-text-muted); max-width: 620px; line-height: 1.6; }
+/* Blanco puro sobre transparente, como el logotipo: tal cual en oscuro,
+   entintado en claro. Con --c-brand-filter salía NEGRO sobre fondo tinta. */
+.qs-avales img { height: 34px; width: auto; opacity: 0.9; filter: var(--c-logo-filter); }
+:root[data-theme="claro"] .qs-avales img { opacity: 0.78; }
+
+.qs-tray { max-width: var(--max); margin: 0 auto; padding: 96px var(--pad-x); }
+.qs-tray-row { display: grid; grid-template-columns: 340px 1fr; gap: 64px; align-items: center; }
+/* El +15 va dentro del isotipo de R+A, no de un círculo: el hexágono es de
+   la marca y evita el parecido con la referencia que mandó la empresa. */
+/* La caja tiene la PROPORCIÓN del hexágono y el SVG escala parejo. Antes se
+   estiraba a la medida del texto (preserveAspectRatio="none"), y estirar el
+   lienzo descuadra el cálculo de `pathLength`: el trazado se quedaba a
+   medias y luego pegaba el salto. El rótulo largo vive ahora debajo. */
+.qs-tray-disco { display: flex; flex-direction: column; align-items: center; gap: 24px; }
+.qs-hexbox {
+  position: relative;
+  width: 100%; max-width: 320px;
+  aspect-ratio: 240 / 264;
+  display: grid; place-items: center;
+}
+.qs-hex {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  /* La onda del final se expande más allá del vértice: sin esto se recorta. */
+  overflow: visible;
+}
+.qs-hex .hx {
+  fill: none; stroke-linejoin: round; stroke-linecap: round;
+}
+.qs-hex .hx-out { stroke: var(--mo-line-muted); stroke-width: 1.1; }
+.qs-hex .hx-in  { stroke: rgba(var(--c-fg-rgb), 0.2); stroke-width: 0.7; }
+/* Plancha tenue bajo la cifra: da cuerpo al hexágono sin ensuciar el fondo. */
+.qs-hex .hx-plato { fill: rgba(var(--c-fg-rgb), 0.035); stroke: none; }
+/* Guion de longitud cero + remate redondo = punto. En reposo se queda en el
+   vértice de arriba; con movimiento recorre el trazo y vuelve a él. */
+.qs-hex .hx-punta {
+  fill: none; stroke: var(--c-fg); stroke-width: 8;
+  stroke-linecap: round; stroke-linejoin: round;
+  stroke-dasharray: 0 1; stroke-dashoffset: 0;
+}
+.qs-hex .hx-onda {
+  fill: none; stroke: var(--c-fg); stroke-width: 1.2; opacity: 0;
+  transform-box: fill-box; transform-origin: center;
+}
+.qs-tray-disco-txt {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  text-align: center;
+}
+.qs-tray-disco-pie {
+  margin: 0; max-width: 28ch; text-align: center;
+  font-size: 14px; line-height: 1.55; color: var(--mo-text-muted);
+}
+.qs-tray-disco .n {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: clamp(52px, 6vw, 86px); line-height: 0.9; letter-spacing: -0.03em; color: var(--c-fg);
+}
+.qs-tray-disco .u {
+  font-family: var(--font-sans); font-weight: 400;
+  font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--mo-text-muted);
+}
+.qs-tray-lista { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.qs-tray-lista li {
+  display: flex; align-items: baseline; gap: 22px;
+  padding: 26px 0; border-bottom: 1px solid var(--mo-line);
+}
+.qs-tray-lista li:first-child { border-top: 1px solid var(--mo-line); }
+.qs-tray-lista .n {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: clamp(34px, 3.6vw, 52px); line-height: 0.9; letter-spacing: -0.03em;
+  color: var(--c-fg); flex: 0 0 auto; min-width: 3.4ch;
+}
+.qs-tray-lista .l { font-size: 15px; line-height: 1.5; color: var(--mo-text-muted); }
+@media (max-width: 880px) {
+  .qs-tray-row { grid-template-columns: 1fr; gap: 40px; }
+  .qs-tray-disco { max-width: 300px; margin: 0 auto; }
+}
+
+.qs-pilares, .qs-valores, .qs-grupo {
+  max-width: var(--max); margin: 0 auto; padding: 0 var(--pad-x) 96px;
+}
+.qs-pilares-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--mo-line); }
+.qs-pilares-grid article {
+  padding: 34px 30px 40px;
+  border-right: 1px solid var(--mo-line); border-bottom: 1px solid var(--mo-line);
+  display: flex; flex-direction: column; gap: 14px;
+}
+.qs-pilares-grid article:last-child { border-right: 0; }
+.qs-pilares-grid h3 {
+  margin: 0; font-family: var(--font-display); font-weight: 800;
+  font-size: 14px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--c-fg);
+}
+.qs-pilares-grid p { margin: 0; font-size: 15px; line-height: 1.6; color: var(--mo-text-muted); }
+
+.qs-valores-grid {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+  border-top: 1px solid var(--mo-line);
+}
+.qs-valores-grid li {
+  padding: 30px 26px 36px;
+  border-right: 1px solid var(--mo-line); border-bottom: 1px solid var(--mo-line);
+  display: flex; flex-direction: column; gap: 12px;
+}
+.qs-valores-grid li:last-child { border-right: 0; }
+.qs-valores-grid .n {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: 30px; letter-spacing: -0.02em; color: var(--mo-text-subtle);
+}
+.qs-valores-grid h3 {
+  margin: 0; font-family: var(--font-serif); font-weight: 300;
+  font-size: 22px; letter-spacing: -0.02em; color: var(--c-fg);
+}
+.qs-valores-grid p { margin: 0; font-size: 14px; line-height: 1.55; color: var(--mo-text-muted); }
+
+.qs-grupo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.qs-grupo-grid article {
+  border: 1px solid var(--mo-line); padding: 34px 32px 38px;
+  display: flex; flex-direction: column; gap: 20px;
+}
+.qs-grupo-grid .marca { min-height: 54px; display: flex; align-items: center; }
+.qs-grupo-grid .marca img { height: 42px; width: auto; max-width: 220px; object-fit: contain; }
+.qs-grupo-grid .marca .txt {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: 26px; letter-spacing: 0.02em; text-transform: uppercase; color: var(--c-fg);
+}
+.qs-grupo-grid p { margin: 0; font-size: 15px; line-height: 1.65; color: var(--mo-text-muted); }
+@media (max-width: 880px) {
+  .qs-pilares-grid, .qs-valores-grid, .qs-grupo-grid { grid-template-columns: 1fr; }
+  .qs-pilares-grid article, .qs-valores-grid li { border-right: 0; }
+}
+@media (min-width: 881px) and (max-width: 1180px) {
+  .qs-valores-grid { grid-template-columns: 1fr 1fr; }
+  .qs-valores-grid li:nth-child(2n) { border-right: 0; }
+}
+
+/* =============================================================
+   CONTACTO
+   ============================================================= */
+.mk-hero { display: grid; grid-template-columns: 1fr 1fr; align-items: stretch; }
+.mk-hero-panel {
+  background: var(--ryr-ink);
+  padding: 104px var(--pad-x);
+  display: flex; flex-direction: column; gap: 22px; justify-content: center;
+  color: var(--c-fg);
+}
+.mk-hero-panel h1 {
+  margin: 0; font-family: var(--font-display); font-weight: 800;
+  font-size: clamp(40px, 5.4vw, 82px); line-height: 1; letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+.mk-hero-panel .lead { margin: 0; max-width: 46ch; font-size: 16px; line-height: 1.65; color: rgba(var(--c-fg-rgb), 0.76); }
+.mk-hero-datos { display: grid; grid-template-columns: 1fr 1fr; gap: 26px 32px; margin-top: 12px; }
+.mk-hero-datos .d { display: flex; gap: 14px; align-items: flex-start; }
+.mk-hero-datos .ic { flex: 0 0 auto; width: 22px; height: 22px; color: rgba(var(--c-fg-rgb), 0.8); }
+.mk-hero-datos .ic svg { width: 22px; height: 22px; }
+.mk-hero-datos .d > div { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+.mk-hero-datos .l {
+  font-family: var(--font-sans); font-weight: 400;
+  font-size: 9.5px; letter-spacing: 0.26em; text-transform: uppercase;
+  color: rgba(var(--c-fg-rgb), 0.55);
+}
+.mk-hero-datos .v { font-size: 15px; line-height: 1.5; color: var(--c-fg); overflow-wrap: anywhere; }
+.mk-hero-datos .v a { border-bottom: 1px solid rgba(var(--c-fg-rgb), 0.3); }
+.mk-hero-datos .v a:hover { border-color: var(--c-fg); }
+.mk-hero-img { background: center/cover no-repeat; min-height: 420px; }
+@media (max-width: 980px) {
+  .mk-hero { grid-template-columns: 1fr; }
+  .mk-hero-panel { padding: 72px var(--pad-x); }
+  .mk-hero-datos { grid-template-columns: 1fr; }
+  .mk-hero-img { min-height: 260px; }
+}
+
+/* A 1440 px los campos medían 700 px cada uno: ilegibles. */
+.mk-form { max-width: 940px; }
+.mk-form .mk-actions { flex-direction: column; align-items: flex-start; gap: 10px; }
+.mk-form .mk-actions .req,
+.mk-form .mk-actions .fine { font-size: 11.5px; color: var(--mo-text-subtle); }
+.mk-form .mk-actions .mo-btn { margin-top: 8px; }
+.mk-error {
+  margin: 0; padding: 12px 16px;
+  border: 1px solid #c2544a; color: #c2544a;
+  font-size: 13px;
+}
+.mk-thanks { display: flex; flex-direction: column; gap: 16px; padding: 56px 0; align-items: flex-start; }
+.mk-thanks h2 {
+  margin: 0; font-family: var(--font-serif); font-weight: 300;
+  font-size: clamp(34px, 4vw, 56px); line-height: 1.05; letter-spacing: -0.03em; color: var(--c-fg);
+}
+.mk-thanks h2 em { font-family: var(--font-serif-ital); font-style: italic; }
+.mk-thanks p { margin: 0; color: var(--mo-text-muted); max-width: 46ch; }
+.mk-sedes { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.mk-sedes li { display: flex; gap: 12px; align-items: baseline; font-size: 15px; line-height: 1.5; color: var(--mo-text-muted); }
+.mk-sedes .i {
+  flex: 0 0 auto; width: 7px; height: 7px; border-radius: 50%;
+  border: 1px solid var(--c-fg); transform: translateY(-1px);
+}
+/* El calendario nativo hereda el color del texto: en tema oscuro el icono
+   se pierde, así que se invierte con el mismo filtro de marca. */
+.mk-field input[type="date"]::-webkit-calendar-picker-indicator { filter: var(--c-brand-filter); cursor: pointer; }
+
+/* =============================================================
+   LIBRO DE RECLAMACIONES
+   ============================================================= */
+.rc-head {
+  max-width: 900px; margin: 0 auto; padding: 88px var(--pad-x) 40px;
+  display: flex; flex-direction: column; gap: 16px; text-align: center; align-items: center;
+}
+.rc-head h1 {
+  margin: 0; font-family: var(--font-display); font-weight: 800;
+  font-size: clamp(30px, 4.4vw, 54px); line-height: 1.05; letter-spacing: -0.01em;
+  text-transform: uppercase; color: var(--c-fg);
+}
+.rc-head .lead { margin: 0; font-size: 15px; line-height: 1.7; color: var(--mo-text-muted); max-width: 68ch; }
+.rc-body { max-width: 900px; margin: 0 auto; padding: 0 var(--pad-x) 104px; }
+.rc-card {
+  border: 1px solid var(--mo-line); background: var(--c-bg-raised);
+  padding: 36px 34px 40px;
+  display: flex; flex-direction: column; gap: 26px;
+}
+.rc-top { display: grid; grid-template-columns: 1fr auto; gap: 28px; align-items: end; }
+.rc-meta { display: flex; gap: 26px; }
+.rc-meta > div { display: flex; flex-direction: column; gap: 4px; }
+.rc-meta .l {
+  font-family: var(--font-sans); font-weight: 400;
+  font-size: 9.5px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--mo-text-subtle);
+}
+.rc-meta .v { font-family: var(--font-display); font-weight: 800; font-size: 15px; white-space: nowrap; }
+.rc-oblig { margin: -12px 0 0; font-size: 12px; color: var(--mo-text-subtle); }
+.rc-fs { border: 0; border-top: 1px solid var(--mo-line); margin: 0; padding: 24px 0 0; display: flex; flex-direction: column; gap: 20px; }
+.rc-fs legend {
+  padding: 0 12px 0 0;
+  font-family: var(--font-display); font-weight: 800;
+  font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--c-fg);
+}
+.rc-tipo { display: flex; gap: 8px; flex-wrap: wrap; }
+.rc-tipo label {
+  padding: 9px 18px; cursor: pointer;
+  font-family: var(--font-sans); font-weight: 400;
+  font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+  border: 1px solid var(--mo-line); border-radius: 999px; color: rgba(var(--c-fg-rgb), 0.66);
+  transition: all 200ms;
+}
+.rc-tipo label.is-active { background: var(--c-fg); color: var(--c-bg); border-color: var(--c-fg); }
+.rc-tipo input { display: none; }
+.rc-help, .rc-legal { margin: 0; font-size: 12.5px; line-height: 1.6; color: var(--mo-text-subtle); }
+.rc-legal { border-top: 1px solid var(--mo-line); padding-top: 20px; }
+.rc-thanks { align-items: flex-start; text-align: left; }
+.rc-thanks h2 {
+  margin: 0; font-family: var(--font-serif); font-weight: 300;
+  font-size: clamp(28px, 3.4vw, 44px); letter-spacing: -0.03em; color: var(--c-fg);
+}
+.rc-thanks .codigo { margin: 0; font-family: var(--font-display); font-weight: 800; font-size: 22px; }
+.rc-thanks p { margin: 0; color: var(--mo-text-muted); }
+@media (max-width: 640px) {
+  .rc-top { grid-template-columns: 1fr; }
+  .rc-card { padding: 26px 20px 30px; }
+}
+
+/* =============================================================
+   PIE — redes con icono, banda legal y libro de reclamaciones
+   ============================================================= */
+/* El logotipo de R+A ya no se entinta con un filtro: ver .mo-brand .lk, más
+   abajo. Aquí solo queda la pieza de lanzamiento, que usa el logotipo del
+   PROYECTO (blanco sobre transparente, como los de las tarjetas). */
+.mh-launch-logo { filter: var(--c-logo-filter); }
+
+.mo-footer-col a.mas { display: inline-flex; align-items: center; gap: 10px; }
+.mo-footer-col a.mas .arr { width: 16px; height: 1px; background: currentColor; transition: width 200ms var(--ease-out); }
+.mo-footer-col a.mas:hover .arr { width: 24px; }
+.mo-footer-col--social a { display: inline-flex; align-items: center; gap: 10px; }
+.mo-footer-col--social .so { width: 15px; height: 15px; fill: currentColor; flex: 0 0 auto; opacity: 0.8; }
+.mo-footer-top {
+  margin-left: auto; flex: 0 0 auto;
+  width: 42px; height: 42px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 1px solid var(--mo-line); color: var(--c-fg);
+  transition: background 220ms var(--ease-out), border-color 220ms var(--ease-out);
+}
+.mo-footer-top:hover { background: rgba(var(--c-fg-rgb), 0.08); border-color: var(--c-fg); }
+.mo-footer-top svg { width: 18px; height: 18px; fill: currentColor; }
+.mo-footer-legal {
+  background: var(--c-bg-deep);
+  padding: 26px var(--pad-x);
+  display: flex; flex-direction: column; gap: 16px; align-items: center;
+}
+.mo-footer-legal .aviso {
+  margin: 0; max-width: 100ch; text-align: center;
+  font-size: 11px; line-height: 1.7; color: var(--mo-text-subtle);
+}
+.mo-footer-legal-links { display: flex; gap: 28px; flex-wrap: wrap; justify-content: center; }
+.mo-footer-legal-links a {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 12px; color: var(--mo-text-muted);
+  border-bottom: 1px solid var(--mo-line); padding-bottom: 2px;
+  transition: color 200ms, border-color 200ms;
+}
+.mo-footer-legal-links a:hover { color: var(--c-fg); border-color: var(--c-fg); }
+.mo-footer-legal-links svg { width: 15px; height: 15px; fill: currentColor; opacity: 0.75; }
+@media (max-width: 720px) {
+  .mo-footer-legal { padding: 22px 20px; }
+  .mo-footer-legal .aviso { font-size: 10.5px; text-align: left; }
+}
+
+/* ---------- Panel: descarga en Excel de consultas y reclamaciones ---------- */
+.es-export {
+  display: flex; align-items: end; gap: 14px; flex-wrap: wrap;
+  margin: 0 0 24px; padding: 16px 18px;
+  border: 1px solid rgba(252, 246, 238, 0.18);
+}
+.es-export .lbl {
+  font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase;
+  opacity: 0.6; align-self: center;
+}
+.es-export label { display: flex; flex-direction: column; gap: 5px; font-size: 11px; opacity: 0.75; }
+.es-export input[type="date"] {
+  background: transparent; color: inherit;
+  border: 1px solid rgba(252, 246, 238, 0.22); padding: 7px 9px; font-size: 13px;
+}
+.es-head--sub { margin-top: 64px; }
+
+/* ---------- Trayectoria: el hexágono se traza al entrar en pantalla ----------
+   Regla del contrato §5: nada se oculta salvo bajo html.has-motion Y con el
+   atributo que pone motion.js, que además lo retira al terminar. Sin JS o con
+   prefers-reduced-motion el hexágono aparece ya trazado y con el punto en el
+   vértice de arriba: el fotograma final ES el estado de reposo, así que al
+   retirar el atributo no se ve ningún salto.
+
+   La secuencia: un punto arranca del vértice de arriba y recorre el hexágono
+   dejando la línea detrás; el trazo de dentro sale a la vez en sentido
+   contrario; la plancha se enciende a media vuelta; el punto vuelve a casa y
+   suelta una onda. Nada de círculos completándose. */
+html.has-motion [data-hex-anim] .hx { stroke-dasharray: 1; stroke-dashoffset: 1; }
+html.has-motion [data-hex-anim] .hx-plato { opacity: 0; }
+html.has-motion [data-hex-anim] .hx-punta { opacity: 0; }
+html.has-motion [data-hex-anim] .qs-tray-disco-txt { opacity: 0; transform: translateY(14px); }
+
+@keyframes qs-hex-trazo { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+/* El punto va pegado a la punta del trazo: misma duración y misma curva. */
+@keyframes qs-hex-viaje {
+  from { stroke-dashoffset: 0; opacity: 1; }
+  to   { stroke-dashoffset: -1; opacity: 1; }
+}
+@keyframes qs-hex-plato { to { opacity: 1; } }
+@keyframes qs-hex-onda {
+  from { opacity: 0.5; transform: scale(1); }
+  to   { opacity: 0; transform: scale(4.4); }
+}
+@keyframes qs-hex-cifra { to { opacity: 1; transform: none; } }
+
+html.has-motion [data-hex-anim].is-drawn .hx-out {
+  animation: qs-hex-trazo 1500ms var(--ease-inout) forwards;
+}
+html.has-motion [data-hex-anim].is-drawn .hx-punta {
+  animation: qs-hex-viaje 1500ms var(--ease-inout) forwards;
+}
+html.has-motion [data-hex-anim].is-drawn .hx-in {
+  animation: qs-hex-trazo 1500ms var(--ease-inout) 320ms forwards;
+}
+html.has-motion [data-hex-anim].is-drawn .hx-plato {
+  animation: qs-hex-plato 900ms var(--ease-out) 860ms forwards;
+}
+html.has-motion [data-hex-anim].is-drawn .hx-onda {
+  animation: qs-hex-onda 900ms var(--ease-out) 1500ms forwards;
+}
+html.has-motion [data-hex-anim].is-drawn .qs-tray-disco-txt {
+  animation: qs-hex-cifra 900ms var(--ease-out) 520ms forwards;
+}
+
+/* =============================================================
+   ENTRADA DE LA PÁGINA
+   El atributo lo pone el fragmento del <head> antes del primer
+   pintado; motion.js reproduce la secuencia y lo retira. El propio
+   fragmento lleva un relevo por si el script no llega: nada puede
+   quedarse escondido (contrato §5).
+   ============================================================= */
+html.has-motion[data-entra] .entra { opacity: 0; transform: translateY(22px); }
+html.has-motion[data-entra].entra-go .entra {
+  opacity: 1; transform: none;
+  transition: opacity 900ms var(--ease-out) var(--d, 0ms),
+              transform 900ms var(--ease-out) var(--d, 0ms);
+}
+/* La cabecera solo funde. Lleva su propio translate para esconderse al bajar
+   y encadenar los dos transform la hacía dar un salto. */
+html.has-motion[data-entra] .entra-h { opacity: 0; }
+html.has-motion[data-entra].entra-go .entra-h {
+  opacity: 1;
+  transition: opacity 700ms var(--ease-out) 140ms, transform 360ms var(--ease-out);
+}
+/* La portada entra acercándose, y el velo detrás: primero se ve la foto. */
+html.has-motion[data-entra] .mh-slide.is-active .mh-slide-img {
+  transform: scale(1.1); transition: none;
+}
+html.has-motion[data-entra].entra-go .mh-slide.is-active .mh-slide-img {
+  transform: scale(1); transition: transform 2600ms var(--ease-out);
+}
+html.has-motion[data-entra] .mh-slide.is-active .mh-slide-veil { opacity: 0; }
+html.has-motion[data-entra].entra-go .mh-slide.is-active .mh-slide-veil {
+  opacity: 1; transition: opacity 1100ms var(--ease-out);
+}
+
+/* ---------- Titulares: la línea sube desde debajo de su propia caja ----------
+   El envoltorio .ln lo crea motion.js y lo deshace al terminar; el relleno con
+   margen negativo compensado deja sitio a las colas de la g y la j sin mover
+   nada de la maquetación. */
+html.has-motion [data-ln] {
+  overflow: hidden;
+  padding: 0.1em 0.12em 0.18em;
+  margin: -0.1em -0.12em -0.18em;
+}
+html.has-motion [data-ln] > .ln { display: block; transform: translateY(115%); opacity: 0; }
+html.has-motion [data-ln].is-up > .ln {
+  transform: none; opacity: 1;
+  transition: transform 1050ms var(--ease-out) 120ms, opacity 800ms var(--ease-out) 120ms;
+}
+
+/* Saltos de ancla suaves: el sitio es de una sola columna y casi todos los
+   enlaces internos bajan dentro de la misma página. */
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+/* =============================================================
+   INICIO · cabecera sobre la portada
+   Al entrar, el render ocupa la pantalla entera y la cabecera va
+   encima, transparente y en blanco. Recién al bajar aparece la
+   barra blanca de siempre.
+   ============================================================= */
+body.portada-plena .mo-util,
+body.portada-plena .mo-nav {
+  position: fixed; left: 0; right: 0;
+  transition: background 320ms var(--ease-out), border-color 320ms var(--ease-out),
+              transform 360ms var(--ease-out), box-shadow 320ms var(--ease-out);
+}
+body.portada-plena .mo-util { top: 0; z-index: 51; }
+body.portada-plena .mo-nav  { top: var(--util-h, 40px); z-index: 50; }
+/* Con la cabecera fija, la portada empieza en el borde de la pantalla. */
+body.portada-plena .mh-slider { min-height: 100vh; min-height: 100svh; }
+
+/* Estado de reposo: nada de blanco, tipografía sobre la foto. El par de
+   color se redefine ENTERO (--c-fg se resuelve en :root y los hijos heredan
+   el valor ya sustituido), igual que en los bloques sobre fotografía. */
+body.portada-plena:not(.is-scrolled) .mo-util,
+body.portada-plena:not(.is-scrolled) .mo-nav {
+  --c-fg-rgb: 255, 255, 255;
+  --c-fg: #FFFFFF;
+  --c-bg: transparent;
+  --mo-line: rgba(255, 255, 255, 0.24);
+  --mo-line-soft: rgba(255, 255, 255, 0.14);
+  --mo-line-muted: rgba(255, 255, 255, 0.5);
+  --mo-text-muted: rgba(255, 255, 255, 0.78);
+  --mo-text-subtle: rgba(255, 255, 255, 0.62);
+  --c-logo-filter: none;   /* el lockup ya es blanco */
+  background: transparent;
+  border-bottom-color: transparent;
+  box-shadow: none;
+  /* Sin esto el desenfoque de la barra seguía activo y dibujaba un rectángulo
+     turbio sobre el render, justo del ancho de la cabecera. */
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+/* El botón sólido invertiría a texto blanco sobre fondo blanco. */
+body.portada-plena:not(.is-scrolled) .mo-nav .mo-btn--solid {
+  background: #FFFFFF; color: #141413; border-color: #FFFFFF;
+}
+body.portada-plena:not(.is-scrolled) .mo-nav .mo-btn--solid:hover {
+  background: transparent; color: #FFFFFF;
+}
+/* El panel del menú móvil sí necesita fondo: es una lista sobre la foto. */
+body.portada-plena:not(.is-scrolled) .mo-nav-links.is-open {
+  background: rgba(12, 13, 11, 0.94);
+}
+/* Al bajar vuelve la barra blanca de siempre, con su sombra. */
+body.portada-plena.is-scrolled .mo-util,
+body.portada-plena.is-scrolled .mo-nav {
+  background: rgba(var(--c-bg-rgb), 0.96);
+  backdrop-filter: blur(14px);
+}
+body.portada-plena.is-scrolled .mo-util { border-bottom: 1px solid var(--mo-line); }
+@media (max-width: 880px) {
+  /* En móvil la barra superior se oculta para que la foto llegue arriba del todo. */
+  body.portada-plena:not(.is-scrolled) .mo-util { opacity: 0; pointer-events: none; }
+  body.portada-plena .mo-nav { top: 0; }
+  body.portada-plena.is-scrolled .mo-nav { top: var(--util-h, 0px); }
+}
+/* La barra superior acompaña a la cabecera cuando se retira al bajar. */
+body.portada-plena.nav-hidden .mo-util { transform: translateY(-100%); }
+
+/* =============================================================
+   REVISIÓN AGOSTO 2026 · SEGUNDA VUELTA
+   Lote de ajustes sobre capturas anotadas. Este bloque va AL FINAL
+   a propósito: con la misma especificidad gana el último, y así se
+   ve de un vistazo qué cambió en esta ronda sin desenterrar las
+   reglas originales (ver el mapa de la cascada en CONTRACT §5).
+   ============================================================= */
+
+/* ---------- Titulares de sección centrados ---------- */
+/* «Nuestra trayectoria», «Nuestros pilares»… iban pegados al margen
+   izquierdo y el rótulo de encima repetía el mismo texto. El rótulo se
+   vació en el contenido; aquí se centra el bloque. */
+.mo-section-head--centro {
+  max-width: 900px; margin-left: auto; margin-right: auto;
+  align-items: center; text-align: center;
+}
+.mo-section-head--centro .idx { justify-content: center; }
+
+/* ---------- Rótulos: menos separación entre letras ----------
+   «me dicen los clientes que las letras son como muy separadas». El
+   tracking de los rótulos diminutos baja de 0,28-0,32em a 0,14em, que
+   sigue leyéndose como versalita pero ya no se deshilacha. */
+.mo-eyebrow,
+.mo-section-head .idx,
+.mk-field .lbl,
+.mo-footer-col .h,
+.rc-fs > legend,
+.mo-card .specs .l {
+  letter-spacing: 0.14em;
+}
+.mk-field .lbl,
+.mo-eyebrow {
+  /* «tiene que ser el gris más acentuado»: el rótulo se leía tenue. */
+  color: rgba(var(--c-fg-rgb), 0.68);
+  font-size: 11px;
+}
+/* El libro de reclamaciones se veía «muy separado y un poco tenue». */
+.rc-card label, .rc-card .rc-help, .rc-legal, .rc-oblig {
+  letter-spacing: 0.01em;
+  color: rgba(var(--c-fg-rgb), 0.78);
+}
+
+/* ---------- Línea de tiempo de entregados: rayas a la misma altura ----------
+   Las fichas se estiran todas al mismo alto (align-items: stretch) y la
+   caja de la lámina era la elástica (flex: 1 1 auto), así que absorbía la
+   diferencia de líneas de la dirección: cada año, cada punto y cada tramo
+   de raya quedaba a una altura distinta. Se fija la lámina y ahora la
+   elástica es el pie. */
+.mp-tray-item .obra { flex: 0 0 220px; min-height: 220px; }
+.mp-tray-item .pie { flex: 1 1 auto; }
+
+/* ---------- Rejilla de obras entregadas (4ª pestaña) ----------
+   La lámina de la empresa: logotipo a la izquierda, fotografía de la fachada
+   a la derecha y la placa de la dirección montada sobre la foto. La ficha es
+   una retícula de dos columnas y dos filas; la foto ocupa las dos filas de la
+   derecha y la placa sale de su columna con un margen negativo para pisarla,
+   que es lo que da el escalón de la referencia. */
+.mp-entregados {
+  list-style: none; margin: 34px 0 0; padding: 0;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 40px 30px;
+}
+.mp-entregados > li {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr auto;
+  align-items: stretch;
+}
+/* La columna de la izquierda es una PLACA BLANCA fija, no una superficie del
+   tema: los logotipos de las obras son de imprenta, a todo color y pensados
+   para papel blanco —Art, Neo y Tempo son negros—, así que en tema oscuro
+   desaparecerían. Mismo criterio que las láminas de planos, que tampoco se
+   invierten. Por eso el texto de la placa también va en tinta fija. */
+.mp-entregados .marca {
+  grid-column: 1; grid-row: 1;
+  display: flex; align-items: center; justify-content: center;
+  padding: 14px 20px 18px 14px; min-height: 92px;
+  background: #FFFFFF;
+}
+.mp-entregados .marca img {
+  max-width: 100%; max-height: 92px; width: auto; height: auto; object-fit: contain;
+}
+.mp-entregados .obra-txt {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: 15px; letter-spacing: 0.06em; text-transform: uppercase; text-align: center;
+}
+.mp-entregados .foto {
+  grid-column: 2; grid-row: 1 / span 2;
+  aspect-ratio: 3 / 4; overflow: hidden; background: var(--c-bg-deep);
+}
+.mp-entregados .foto img { width: 100%; height: 100%; object-fit: cover; }
+.mp-entregados .placa {
+  grid-column: 1; grid-row: 2; align-self: end;
+  position: relative; z-index: 2; margin-right: -26px;
+  display: flex; flex-direction: column; gap: 5px;
+  padding: 13px 15px;
+  background: #F1F1F1;
+  border-left: 2px solid var(--ryr-verde);
+  color: var(--ryr-ink);
+}
+.mp-entregados .dir { font-size: 11.5px; line-height: 1.45; color: rgba(20, 20, 19, 0.62); }
+.mp-entregados .nm {
+  display: flex; align-items: baseline; gap: 10px;
+  font-family: var(--font-display); font-weight: 800;
+  font-size: 12.5px; letter-spacing: 0.1em; text-transform: uppercase;
+}
+.mp-entregados .anio {
+  font-family: var(--font-num); font-weight: 400; letter-spacing: 0;
+  font-variant-numeric: tabular-nums;
+  font-size: 12px; color: rgba(20, 20, 19, 0.45);
+}
+@media (max-width: 420px) {
+  .mp-entregados { grid-template-columns: 1fr; }
+}
+
+/* ---------- Detalle · portada solo con el logotipo ---------- */
+/* Fuera el rótulo de zona/estado y el nombre escrito: el logotipo ya lo
+   dice, y ahora manda de verdad. */
+.pd-hero .mc-hero-l { gap: 0; }
+.pd-hero-logo {
+  height: clamp(96px, 15vw, 210px); max-width: min(760px, 84vw);
+  width: auto; object-fit: contain; object-position: left center;
+  opacity: 1;
+}
+@media (max-width: 720px) {
+  .pd-hero-logo { height: clamp(80px, 22vw, 130px); max-width: 88vw; }
+}
+
+/* ---------- Detalle · el brochure, solo y a la derecha ---------- */
+.pd-barra--solo { justify-content: flex-end; }
+
+/* ---------- Detalle · la frase del proyecto ocupa el hueco ---------- */
+.pd-info-frase {
+  margin: 0;
+  font-family: var(--font-serif); font-weight: 300;
+  font-size: clamp(26px, 3.4vw, 44px); line-height: 1.15; letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+/* ---------- Detalle · áreas comunes que quepan en el móvil ----------
+   La lámina era 16/9 a sangre y en un teléfono salía enorme; encima
+   ahora pasan solas, así que tienen que verse enteras. */
+@media (max-width: 720px) {
+  .pd-carrusel-item { aspect-ratio: 4 / 5; }
+  .pd-carrusel-item > img { object-position: center; }
+}
+/* La galería tenía láminas de 480×600 px FIJOS: en 390 px de ancho no
+   entraba ninguna entera y el encaje del scroll dejaba media foto. */
+@media (max-width: 720px) {
+  .mc-gallery .item,
+  .mc-gallery .item:nth-child(3n),
+  .mc-gallery .item:nth-child(5n) {
+    width: calc(100vw - (var(--pad-x) * 2));
+    height: auto; aspect-ratio: 4 / 5;
+  }
+  .mc-gallery { gap: 12px; padding-left: var(--pad-x); padding-right: var(--pad-x); }
+}
+
+/* ---------- Detalle · visor de planos ---------- */
+/* La tira de miniaturas se retira EN CUANTO hay JS (la clase la pone
+   site.js). Sin JS sigue visible: es la única forma de llegar a cada
+   plano. */
+.pd-visor-tira.is-oculta { display: none; }
+/* La ficha pasa a leerse de arriba abajo y centrada, como la referencia:
+   logotipo, tipo, y debajo área · dormitorios · baños. */
+.pd-visor-ficha { align-items: center; text-align: center; gap: 22px; }
+.pd-visor-ficha .lg { align-self: center; }
+.pd-visor-ficha .tipo { width: 100%; }
+.pd-visor-ficha dl { width: 100%; gap: 16px; }
+.pd-visor-ficha dl > div { align-items: center; }
+.pd-visor-paso {
+  margin-top: auto; padding-top: 18px;
+  font-family: var(--font-display); font-weight: 800;
+  font-size: 12px; letter-spacing: 0.14em; color: rgba(20, 20, 19, 0.5);
+}
+.pd-visor-paso .s { margin: 0 4px; opacity: 0.5; }
+@media (max-width: 980px) {
+  .pd-visor-ficha dl { justify-content: center; }
+  .pd-visor-paso { margin-top: 6px; padding-top: 0; }
+}
+
+/* ---------- Detalle · el formulario del proyecto ---------- */
+.pd-form { scroll-margin-top: calc(var(--nav-h, 92px) + 12px); }
+.pd-form-caja {
+  max-width: 860px; margin: 0 auto;
+  border: 1px solid var(--mo-line); padding: 40px clamp(20px, 4vw, 52px) 44px;
+  background: var(--c-bg-deep);
+}
+@media (max-width: 560px) { .pd-form-caja { padding: 28px 20px 32px; } }
+
+/* ---------- Tarjeta de proyecto: la lámina del documento ----------
+   UBICACIÓN · LOGO · METRAJE + DORMITORIOS · PRECIO · VER PROYECTO.
+   El nombre escrito se cambia por el logotipo del proyecto, el metraje
+   pasa delante de los dormitorios y el «ver proyecto» deja de ser un
+   enlace suelto para ser el botón negro de la lámina. */
+.mo-card-marca {
+  display: flex; align-items: center; min-height: 58px;
+  margin: 2px 0 4px;
+}
+.mo-card-marca img {
+  height: 46px; width: auto; max-width: min(240px, 100%);
+  object-fit: contain; object-position: left center;
+  /* Blanco sobre transparente: sobre el fondo claro hay que entintarlo,
+     igual que el lockup de la marca (nunca --c-brand-filter, que lo
+     dejaba negro invisible en tema oscuro). */
+  filter: var(--c-logo-filter);
+}
+.mo-card .specs--par { grid-template-columns: repeat(2, 1fr); }
+.mo-card .specs--precio {
+  grid-template-columns: 1fr;
+  border-top: 0; padding-top: 12px; margin-top: 0;
+}
+/* El precio cierra el bloque, así que la línea la marca el par de arriba. */
+.mo-card .specs--par { margin-top: auto; }
+.mo-card .specs .n .u { margin-left: 2px; }
+
+/* El botón vive FUERA del grid de la tarjeta, así que se le repite la
+   columna para que arranque donde arranca el texto y no debajo de la foto. */
+.mo-card-acts {
+  border-top: 0; padding-top: 0; margin-top: 16px;
+  display: grid; grid-template-columns: 220px 1fr; gap: 28px;
+}
+.mo-card-acts > * { grid-column: 2; justify-self: start; }
+.mo-card-go.mo-btn {
+  padding: 13px 22px;
+  /* .mo-card-go fija `color: var(--c-fg)` más abajo en el archivo y ganaba
+     sobre .mo-btn--solid: el botón salía negro con la letra negra. */
+  color: var(--c-bg);
+}
+.mo-card-go.mo-btn .arr { background: currentColor; }
+@media (max-width: 980px) {
+  .mo-card-acts { grid-template-columns: 1fr; gap: 0; }
+  .mo-card-acts > * { grid-column: 1; }
+}
+@media (max-width: 420px) {
+  .mo-card .specs--par { grid-template-columns: repeat(2, 1fr); }
+  .mo-card-marca img { height: 38px; }
+}
+
+/* =============================================================
+   REVISIÓN AGOSTO 2026 · TERCERA VUELTA
+   Logotipo oficial (hexágono con la hoja verde), Lato para las
+   cifras, el verde de marca en las rayas finas, la tarjeta de
+   proyecto encuadrada y las fotos del equipo en las cabeceras.
+   Va al final por lo mismo que el bloque anterior: a igual
+   especificidad gana el último.
+   ============================================================= */
+
+/* ---------- Logotipo R+A: dos archivos, no un filtro ----------
+   `filter: invert(1)` volvía magenta la hoja verde. Se sirven las dos
+   versiones —tinta y blanco, las dos con hoja— y aquí se elige según el
+   fondo: blanco en tema oscuro y en la cabecera transparente del inicio. */
+.mo-brand .lk-blanco,
+.mo-footer-brand .lock.lk-blanco { display: none; }
+:root[data-theme="oscuro"] .mo-brand .lk-ink,
+:root[data-theme="oscuro"] .mo-footer-brand .lock.lk-ink { display: none; }
+:root[data-theme="oscuro"] .mo-brand .lk-blanco,
+:root[data-theme="oscuro"] .mo-footer-brand .lock.lk-blanco { display: block; }
+body.portada-plena:not(.is-scrolled) .mo-brand .lk-ink { display: none; }
+body.portada-plena:not(.is-scrolled) .mo-brand .lk-blanco { display: block; }
+/* El lockup nuevo es más ancho que el anterior (lleva «Inmobiliaria» en dos
+   líneas al costado): sin bajar la altura desbordaba la barra. */
+.mo-brand img { height: 34px; }
+@media (max-width: 880px) { .mo-brand img { height: 28px; } }
+.mo-footer-brand .lock { width: auto; height: 46px; max-width: 220px; align-self: flex-start; }
+
+/* ---------- CIFRAS EN LATO ----------
+   Metraje, dormitorios, precio, años y contadores. `tabular-nums` alinea
+   las columnas de las siete tarjetas. */
+.mo-card .specs .n,
+.mo-page-head .ix .num,
+.qs-tray-disco-txt .n,
+.qs-tray-lista .n,
+.qs-valores-grid .n,
+.mp-tray-item .anio,
+.mp-entregados .anio,
+.pd-visor-ficha dd,
+.pd-ficha-row .v,
+.pd-carrusel-cuenta,
+.pd-visor-paso {
+  font-family: var(--font-num);
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0;
+}
+/* El «/» del 006/2026 sigue siendo la cursiva editorial. */
+.mo-page-head .ix .num em { font-family: var(--font-serif-ital); }
+
+/* ---------- TARJETA DE PROYECTO ENCUADRADA ----------
+   «que quede bien en un cuadradito: el botón negro está más abajo de lo que
+   debería». La foto pasa a ocupar TODO el alto de la tarjeta y el botón
+   entra en la columna de la ficha, así el pie del botón cierra a ras del pie
+   de la foto en vez de colgar. El aire muerto que había entre el logotipo
+   del proyecto y la raya desaparece porque ya no hay que estirar la ficha
+   hasta el alto de una foto 4/5. */
+.mo-card {
+  display: grid;
+  grid-template-columns: 210px minmax(0, 1fr);
+  gap: 26px;
+  align-items: stretch;
+}
+.mo-card-img {
+  aspect-ratio: auto;
+  height: 100%; min-height: 296px;
+}
+.mo-card-body {
+  display: flex; flex-direction: column;
+  gap: 0; padding-top: 2px; min-width: 0;
+}
+.mo-card-ficha {
+  display: flex; flex-direction: column; gap: 12px;
+  flex: 1 1 auto; color: inherit; min-width: 0;
+}
+.mo-card-acts {
+  display: block; grid-template-columns: none;
+  margin-top: 18px; padding-top: 0; border-top: 0;
+}
+.mo-card .specs .n { font-size: 20px; line-height: 1.1; }
+.mo-card .specs .n .u {
+  font-family: var(--font-sans); font-weight: 400;
+  font-size: 11.5px; letter-spacing: 0.04em;
+}
+/* La raya fina del documento, en el verde de marca. Es el acento: una línea
+   de 1 px, no un bloque de color. */
+.mo-card .specs--par {
+  border-top: 1px solid var(--c-verde);
+  padding-top: 15px;
+}
+@media (max-width: 980px) {
+  .mo-card { grid-template-columns: 1fr; gap: 18px; }
+  .mo-card-img { aspect-ratio: 4/3; height: auto; min-height: 0; }
+  .mo-card-acts { margin-top: 16px; }
+}
+
+/* ---------- El verde, en las demás rayas finas ----------
+   El guion de los rótulos de sección y el subrayado del menú activo. */
+.mo-section-head .idx::before { background: var(--c-verde); }
+.mo-nav-links a.is-active::after { background: var(--c-verde); }
+/* En la cabecera transparente sobre el render el verde oscuro no se ve. */
+body.portada-plena:not(.is-scrolled) .mo-nav-links a.is-active::after {
+  background: var(--ryr-verde-claro);
+}
+
+/* ---------- Línea de tiempo: los hitos en verde ----------
+   Es como la trae la lámina de la empresa: trazo y punto verdes sobre el
+   fondo tinta. */
+.mp-tray-item .marca::before { background: rgba(47, 185, 84, 0.5); }
+.mp-tray-item .punto {
+  background: var(--ryr-verde-claro);
+  border-color: var(--ryr-verde-claro);
+}
+/* Las láminas se recortaban por arriba —se comían el logotipo— porque el
+   max-height del dibujo (220 px) era mayor que el hueco real de la caja
+   (220 menos el padding de abajo) y el flex-end empujaba el sobrante fuera. */
+.mp-tray-item .obra img { max-height: 100%; }
+
+/* ---------- Cabecera de QUIÉNES SOMOS: texto + foto del equipo ----------
+   Misma partición que contacto, que es la referencia que mandó la empresa:
+   panel oscuro con el texto y, al lado, la fotografía. */
+.qs-hero--split {
+  display: grid; grid-template-columns: 1fr 1fr;
+  align-items: stretch; min-height: 56svh;
+  background: var(--ryr-ink);
+}
+.qs-hero--split .qs-hero-inner {
+  max-width: none; margin: 0;
+  padding: clamp(72px, 8vw, 120px) clamp(28px, 5vw, 84px);
+  justify-content: center; gap: 18px;
+}
+.qs-hero--split .qs-hero-inner > * { max-width: 620px; }
+/* Tope más bajo que el de una cabecera a ancho completo: aquí el titular
+   vive en media pantalla y a 76 px «¿QUIÉNES somos?» partía en dos líneas. */
+.qs-hero--split h1 { font-size: clamp(34px, 4.4vw, 66px); }
+.qs-hero--split .lead { font-size: 16px; line-height: 1.65; }
+.qs-hero-foto { position: relative; overflow: hidden; background: var(--ryr-ink); }
+.qs-hero-foto img {
+  width: 100%; height: 100%; object-fit: cover; object-position: center 22%;
+}
+@media (max-width: 900px) {
+  .qs-hero--split { grid-template-columns: 1fr; }
+  .qs-hero-foto { min-height: 340px; }
+}
+
+/* La foto de contacto también es un retrato: sin subir el encuadre, el
+   recorte se quedaba con la mesa y dejaba la cara fuera. */
+.mk-hero-img { background-position: center 20%; }
+
+/* ---------- Pieza de lanzamiento entera ----------
+   Cuando la imagen ya es la lámina terminada de la empresa, la ventana es la
+   lámina y nada más: se ensancha (es apaisada, no un 4/5) y pierde el marco
+   y el fondo, que solo tenían sentido cuando debajo iba un bloque de texto. */
+.mh-launch-card--pieza {
+  width: min(880px, 100%);
+  background: transparent; border: 0;
+}
+.mh-launch-pieza { display: block; }
+.mh-launch-pieza img { width: 100%; height: auto; display: block; }
+
+/* ---------- Cabecera fina de /proyectos ----------
+   «Que se vean de frente los proyectos»: fuera el titular, la bajada y la
+   numeración. Queda la miga de pan y un h1 que no se dibuja. La retícula de
+   dos columnas de .mo-page-head no aplica aquí, y el borde tampoco: con la
+   cabecera reducida a una línea, la raya y la de la barra de filtros
+   quedaban a dos dedos una de otra. */
+.mo-page-head--fina {
+  display: block;
+  padding: 34px var(--pad-x) 22px;
+  border-bottom: 0;
+}
+.mo-page-head--fina .crumb {
+  font-family: var(--font-display);
+  font-size: 10px; letter-spacing: 0.32em; text-transform: uppercase;
+  color: var(--mo-text-subtle);
+  display: flex; align-items: center; gap: 10px;
+}
+.mo-page-head--fina .crumb a { color: var(--mo-text-muted); transition: color 200ms; }
+.mo-page-head--fina .crumb a:hover { color: var(--c-fg); }
+.mo-page-head--fina .crumb .sep { opacity: 0.4; }
+/* La barra de filtros trae un margen de 56 px pensado para ir después de una
+   cabecera alta; detrás de una línea de miga de pan dejaba un hueco raro. */
+.mo-page-head--fina + #proyectos .mp-controls { margin-top: 20px; }
+
+/* Solo para lectores de pantalla y buscadores. */
+.mo-sr {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0;
+}
+
+/* ---------- Detalle · la ficha, arriba ----------
+   Fuera la bajada del proyecto en tamaño titular: entre el borde de la barra
+   del brochure y el primer dato había 132 px de sección + 72 px de cabecera +
+   la frase. Con la frase fuera, esos dos márgenes sobran igual. */
+.mo-section--apretada { padding: 56px var(--pad-x) 64px; }
+.mo-section-head--pegada { margin-bottom: 26px; }
+
+/* =============================================================
+   REVISIÓN AGOSTO 2026 · CUARTA VUELTA
+   ============================================================= */
+
+/* ---------- Respaldos y trayectoria, centrados ----------
+   El titular de las dos secciones ya iba centrado, pero el contenido se
+   pegaba al margen izquierdo y el bloque entero se leía torcido. */
+.qs-avales { align-items: center; text-align: center; }
+.qs-avales p { max-width: 620px; }
+/* El par hexágono + cifras deja de estirarse de margen a margen: se le da su
+   ancho natural y se centra como un solo bloque. */
+.qs-tray-row {
+  grid-template-columns: 300px minmax(0, 560px);
+  justify-content: center;
+  gap: 72px;
+}
+@media (max-width: 860px) {
+  .qs-tray-row { grid-template-columns: minmax(0, 1fr); justify-content: stretch; gap: 40px; }
+}
+
+/* ---------- Las fotos del equipo: encuadre y pantalla ----------
+   «Hay mucho espacio arriba»: las dos son retratos verticales y el recorte
+   partía demasiado alto, así que sobre la cabeza quedaba media pared. Se baja
+   la ventana del recorte.
+   Y el alto deja de ser un número fijo: con `aspect-ratio` el hueco de la foto
+   crece y encoge con el ancho de la pantalla, que es lo que hace que el
+   encuadre aguante igual en un móvil, en una tablet y en un monitor. */
+/* La de quiénes somos ya viene recortada por arriba en el archivo. */
+.qs-hero-foto img { object-position: center 30%; }
+.mk-hero-img { background-position: center 46%; }
+
+@media (max-width: 900px) {
+  /* Apiladas: la foto ocupa una franja proporcional, no 260/340 px fijos que
+     en pantallas anchas quedaban en tira y en las estrechas en sello. */
+  .qs-hero-foto { min-height: 0; aspect-ratio: 4 / 3; }
+  .qs-hero-foto img { object-position: center 28%; }
+  .mk-hero-img { min-height: 0; aspect-ratio: 4 / 3; background-position: center 40%; }
+}
+@media (max-width: 560px) {
+  .qs-hero-foto { aspect-ratio: 1 / 1; }
+  .mk-hero-img { aspect-ratio: 1 / 1; }
+}
+
+/* ---------- Contacto · las dos sedes, una debajo de otra ---------- */
+.mk-hero-datos .d--ancho { grid-column: 1 / -1; }
+
+/* =============================================================
+   REVISIÓN AGOSTO 2026 · QUINTA VUELTA
+   ============================================================= */
+
+/* ---------- ÁREAS COMUNES · carrusel con vecinas asomando ----------
+   El problema no era el tamaño de la foto sino que no se entendía nada: sin
+   cabecera no sabías en qué apartado estabas, y con la lámina a sangre y sin
+   nada al lado tampoco que hubiera más de una. Ahora la activa va centrada al
+   68 % del ancho y las de al lado asoman apagadas, hay tira de miniaturas
+   debajo y la sección abre con su rótulo y su titular.
+   El alto se topa contra la pantalla (`max-height`) para que la lámina quepa
+   entera aunque el monitor sea muy ancho. */
+.pd-areas { padding-top: 84px; }
+.pd-areas-head { max-width: var(--max); margin: 0 auto 40px; padding: 0 var(--pad-x); }
+
+.pd-carrusel-visor { position: relative; }
+.pd-carrusel-pista {
+  --slide: 68%;
+  gap: 18px;
+  /* El relleno lateral es justo el hueco que sobra a cada lado de la lámina
+     activa: sin él, la primera y la última no se podrían centrar. */
+  padding-inline: calc((100% - var(--slide)) / 2);
+  scroll-snap-type: x mandatory;
+}
+.pd-carrusel-item {
+  flex: 0 0 var(--slide);
+  scroll-snap-align: center;
+  aspect-ratio: 16 / 10;
+  max-height: 66svh;
+  overflow: hidden;
+  transition: opacity 420ms var(--ease-out);
+}
+/* Las vecinas se apagan: se ven, se entiende que están, y no compiten. */
+.pd-carrusel-item:not(.is-active) { opacity: 0.32; }
+.pd-carrusel-item:not(.is-active) .cap { opacity: 0; }
+.pd-carrusel-item .cap { transition: opacity 320ms var(--ease-out); left: 32px; bottom: 28px; }
+.pd-carrusel-item::after { background: linear-gradient(180deg, transparent 58%, rgba(12,13,11,0.7) 100%); }
+
+/* Las flechas viven sobre el hueco lateral, no encima de la foto. */
+.pd-carrusel-arrow { border-radius: 50%; background: rgba(12,13,11,0.45); }
+.pd-carrusel-arrow.prev { left: calc((100% - 68%) / 2 - 26px); }
+.pd-carrusel-arrow.next { right: calc((100% - 68%) / 2 - 26px); }
+.pd-carrusel-arrow[disabled] { opacity: 1; cursor: pointer; }
+
+/* Tira de miniaturas + contador. */
+.pd-carrusel-pie {
+  max-width: var(--max); margin: 22px auto 0; padding: 0 var(--pad-x);
+  display: flex; align-items: center; justify-content: center; gap: 22px; flex-wrap: wrap;
+}
+.pd-carrusel-tira {
+  list-style: none; margin: 0; padding: 0;
+  display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;
+}
+.pd-carrusel-tira button {
+  display: block; position: relative;
+  width: 92px; height: 62px; padding: 0;
+  overflow: hidden;
+  opacity: 0.5; filter: saturate(0.7);
+  transition: opacity 240ms var(--ease-out), filter 240ms var(--ease-out);
+}
+.pd-carrusel-tira button img { width: 100%; height: 100%; object-fit: cover; }
+/* El rótulo del área solo hace falta para quien no ve la miniatura. */
+.pd-carrusel-tira .nm {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
+}
+.pd-carrusel-tira button:hover { opacity: 0.85; filter: none; }
+.pd-carrusel-tira button.is-active { opacity: 1; filter: none; }
+.pd-carrusel-tira button.is-active::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 0;
+  height: 3px; background: var(--c-verde);
+}
+.pd-carrusel-cuenta {
+  position: static; text-shadow: none; color: var(--mo-text-muted);
+}
+.pd-carrusel-cuenta .i { color: var(--c-fg); }
+
+@media (max-width: 1100px) {
+  .pd-carrusel-pista { --slide: 78%; }
+  .pd-carrusel-arrow.prev { left: 12px; }
+  .pd-carrusel-arrow.next { right: 12px; }
+}
+@media (max-width: 720px) {
+  .pd-areas { padding-top: 56px; }
+  .pd-carrusel-pista { --slide: 88%; gap: 12px; }
+  .pd-carrusel-item { aspect-ratio: 4 / 3; max-height: 56svh; }
+  .pd-carrusel-item .cap { left: 20px; bottom: 20px; }
+  .pd-carrusel-tira button { width: 68px; height: 48px; }
+  .pd-carrusel-pie { gap: 14px; }
+}
+
+/* ---------- INFORMACIÓN · una sola pieza, no dos columnas cojas ----------
+   Las cuatro líneas del documento a ancho de lectura y, debajo, las cifras en
+   celdas iguales que se reparten solas. Antes la columna de la derecha tenía
+   tantas filas como datos tuviera ESE proyecto, así que casi siempre acababa
+   más corta o más larga que la izquierda y el bloque se veía torcido. */
+.pd-info { display: block; }
+/* Las cuatro líneas y la parrilla de cifras comparten ancho: con la lista
+   cortada a 860 px la sección volvía a verse partida por la mitad. */
+.pd-info .pd-doc { max-width: none; }
+.pd-datos {
+  margin-top: 44px; padding-top: 4px;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1px;
+  background: var(--mo-line);
+  border: 1px solid var(--mo-line);
+}
+.pd-dato {
+  background: var(--c-bg);
+  padding: 18px 18px 20px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.pd-dato .l {
+  font-family: var(--font-sans); font-weight: 400;
+  font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(var(--c-fg-rgb), 0.55);
+}
+.pd-dato .v {
+  font-family: var(--font-num); font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  font-size: 24px; line-height: 1.1; color: var(--c-fg);
+}
+@media (max-width: 520px) {
+  .pd-datos { grid-template-columns: repeat(2, 1fr); }
+  .pd-dato { padding: 14px 14px 16px; }
+  .pd-dato .v { font-size: 20px; }
+}
+
+/* ---------- Las dos cabeceras partidas, con la misma caja ----------
+   «Que contacto tenga el mismo espacio que quiénes somos, para que sea
+   coherente»: iban con altos distintos (una por svh y otra por un mínimo en
+   píxeles), así que la foto salía más alta en una que en otra. */
+.qs-hero--split,
+.mk-hero { min-height: 80svh; }
+.mk-hero-img { min-height: 0; }
+.qs-hero--split .qs-hero-inner,
+.mk-hero-panel { padding: clamp(64px, 7vw, 104px) clamp(28px, 5vw, 84px); }
+/* Un punto más de recorte por arriba en quiénes somos. */
+.qs-hero-foto img { object-position: center 46%; }
+@media (max-width: 900px) {
+  .qs-hero--split, .mk-hero { min-height: 0; }
+  .mk-hero-panel { padding: 64px var(--pad-x); }
+}
+
+/* =============================================================
+   REVISIÓN AGOSTO 2026 · SEXTA VUELTA — las dos cabeceras partidas
+   ============================================================= */
+
+/* El hueco de la foto de quiénes somos NO puede medir lo que mida la foto.
+   Con la imagen en flujo y `height: 100%` sobre un padre de alto automático,
+   el 100% no resuelve a nada: la columna acababa midiendo lo que da la
+   proporción del archivo (a 1920 px eran 948 px frente a los 842 de
+   contacto) y, de paso, `object-fit: cover` no recortaba nada, así que el
+   reencuadre por CSS no hacía absolutamente NADA. Sacando la imagen del
+   flujo, el alto lo manda la retícula —igual que en contacto, que usa
+   background— y el encuadre vuelve a obedecer. */
+.qs-hero-foto img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: cover;
+}
+
+/* Encuadre calculado, no a ojo. Las dos son retratos metidos en un hueco
+   apaisado, así que `cover` solo deja ver una franja: en quiénes somos el
+   66 % del alto y en contacto el 49 %. La cabeza empieza al 24 % y al 21 %
+   del archivo, y estos porcentajes dejan la franja arrancando un poco por
+   encima —aire suficiente sin la media pared que sobraba—. Los valores de
+   móvil son más bajos porque ahí el hueco es 4/3 o cuadrado y la franja
+   visible es mucho más corta. */
+.qs-hero-foto img { object-position: center 50%; }
+.mk-hero-img { background-position: center 32%; }
+@media (max-width: 900px) {
+  .qs-hero-foto img { object-position: center 26%; }
+  .mk-hero-img { background-position: center 22%; }
+}
+
+/* Por debajo de 1400 px el panel de contacto —que lleva horario, teléfono,
+   dos sedes y correo— crece más que el de quiénes somos y las dos cabeceras
+   volvían a descuadrarse. Se le quita aire al relleno y a la rejilla de datos
+   justo en ese tramo, que es donde aprieta. */
+@media (max-width: 1400px) {
+  .qs-hero--split .qs-hero-inner,
+  .mk-hero-panel { padding-block: 60px; }
+  .mk-hero-datos { gap: 22px 28px; }
+}
+
+/* =============================================================
+   REVISIÓN AGOSTO 2026 · SÉPTIMA VUELTA
+   ============================================================= */
+
+/* ---------- Portada de proyecto · características ----------
+   La columna derecha de la portada estaba vacía. Va un panel translúcido con
+   lo que tiene el proyecto, cada línea con su icono. Es cristal sobre la
+   fotografía, no una tarjeta blanca: el render sigue mandando. */
+.pd-hero-feat {
+  width: min(360px, 34vw);
+  align-self: end;
+  padding: 24px 24px 26px;
+  background: rgba(12, 13, 11, 0.42);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #FFFFFF;
+}
+.pd-hero-feat .t {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--ryr-verde-claro);
+}
+.pd-hero-feat ul { list-style: none; margin: 0; padding: 0; }
+.pd-hero-feat li {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 13px 0;
+  font-size: 13.5px; line-height: 1.45;
+  color: rgba(255, 255, 255, 0.92);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+.pd-hero-feat li:last-child { border-bottom: 0; padding-bottom: 0; }
+.pd-hero-feat .ic-linea {
+  width: 22px; height: 22px; flex: 0 0 22px;
+  margin-top: 1px; opacity: 0.9;
+}
+@media (max-width: 1080px) {
+  /* En cuanto la portada se estrecha, el panel pasa debajo del logotipo: al
+     lado se comía el render y el nombre del proyecto a la vez. */
+  .mc-hero-inner { grid-template-columns: 1fr; }
+  .pd-hero-feat { width: 100%; max-width: 520px; }
+}
+@media (max-width: 720px) {
+  .pd-hero-feat { padding: 18px 18px 20px; }
+  .pd-hero-feat li { font-size: 12.5px; padding: 11px 0; gap: 11px; }
+}
+
+/* ---------- Galería · rejilla, no una tira que se arrastra ----------
+   «Intentas scrollear hacia abajo y mueves las fotos»: era una tira con
+   scroll horizontal, y en un trackpad cualquier gesto con algo de desvío
+   lateral lo capturaba ella en vez de la página. Al pasar a rejilla el
+   problema desaparece de raíz —no hay nada que arrastrar— y además se ven
+   todos los renders de una vez en lugar de tres. */
+.mc-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+  overflow: visible;
+  scroll-snap-type: none;
+  max-width: var(--max); margin: 0 auto;
+}
+.mc-gallery .item {
+  width: auto; height: auto;
+  aspect-ratio: 4 / 3;
+  scroll-snap-align: none;
+}
+/* El ritmo de anchos de la tira ya no aplica: en rejilla dejaba huecos. */
+.mc-gallery .item:nth-child(3n),
+.mc-gallery .item:nth-child(5n) { width: auto; }
+/* Todas del mismo tamaño a propósito. Se probó que una de cada seis ocupara
+   dos columnas, pero en una rejilla la fila mide lo que mida su pieza más
+   alta: la ancha estiraba la fila y sus vecinas quedaban flotando con un
+   hueco debajo. Uniforme se lee ordenado, que es lo que se pidió. */
+.mc-gallery .item.is-hidden { display: none; }
+
+/* ---------- El selector de proyecto, a fila completa ---------- */
+.mk-form .mk-field > select { width: 100%; }
+
+/* El carrusel de áreas comunes sí conserva scroll horizontal —es un carrusel
+   y tiene flechas y miniaturas—, pero que no se encadene con la página. */
+.pd-carrusel-pista { overscroll-behavior-inline: contain; }
+
+/* =============================================================
+   REVISIÓN AGOSTO 2026 · OCTAVA VUELTA
+   ============================================================= */
+
+/* ---------- Cabecera: letra más fina y logotipo más grande ----------
+   El menú iba en --font-display, y de Montserrat solo está cargado el peso
+   800: pidiera el peso que pidiera, salía ExtraBold. Pasa a --font-sans
+   (Poppins), que sí tiene Light de verdad. */
+.mo-nav-links a {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+}
+.mo-nav-links a.is-active { font-weight: 400; }
+.mo-brand img { height: 42px; }
+@media (max-width: 880px) { .mo-brand img { height: 34px; } }
+
+/* ---------- Áreas comunes: las flechas, dentro de la lámina ----------
+   Colgaban del borde exterior y quedaban a caballo entre la lámina activa y
+   la vecina, que es lo que se veía sucio. Ahora van dentro de la activa,
+   pegadas a sus bordes. */
+.pd-carrusel-arrow.prev { left: calc((100% - 68%) / 2 + 16px); }
+.pd-carrusel-arrow.next { right: calc((100% - 68%) / 2 + 16px); }
+@media (max-width: 1100px) {
+  .pd-carrusel-arrow.prev { left: calc((100% - 78%) / 2 + 12px); }
+  .pd-carrusel-arrow.next { right: calc((100% - 78%) / 2 + 12px); }
+}
+@media (max-width: 720px) {
+  .pd-carrusel-arrow.prev { left: calc((100% - 88%) / 2 + 8px); }
+  .pd-carrusel-arrow.next { right: calc((100% - 88%) / 2 + 8px); }
+}
+
+/* ---------- Planos: el visor a la izquierda, el formulario a la derecha ----
+   Es la lámina del documento. Miras la planta y dejas tus datos sin moverte
+   de sitio; antes eran dos secciones separadas por media pantalla. */
+.pd-planos-fila {
+  display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(320px, 1fr);
+  gap: 40px; align-items: start;
+}
+.pd-planos-form .pd-form-caja { padding: 0; background: transparent; border: 0; }
+.pd-planos-form .mk-form { gap: 18px; }
+@media (max-width: 1040px) {
+  /* minmax(0, 1fr) y no 1fr: una columna `1fr` tiene min-width auto, así que
+     el visor de planos —que es ancho por dentro— la estiraba y desbordaba la
+     página 67 px en móvil. */
+  .pd-planos-fila { grid-template-columns: minmax(0, 1fr); gap: 48px; }
+}
+
+/* ---------- Iconos en la ficha de INFORMACIÓN ----------
+   Los rótulos son versalitas diminutas y muy espaciadas: un icono delante
+   les da un ancla visual y hace la tabla escaneable de un vistazo. Van en
+   el mismo gris que el rótulo, no en negro: acompañan, no compiten. */
+.pd-doc dt {
+  display: flex; align-items: center; gap: 10px;
+  color: rgba(var(--c-fg-rgb), 0.55);
+}
+.pd-doc dt .ic-linea { width: 19px; height: 19px; flex: 0 0 19px; opacity: 1; }
+.pd-dato .l { display: flex; align-items: center; gap: 8px; }
+.pd-dato .l .ic-linea { width: 17px; height: 17px; flex: 0 0 17px; opacity: 1; }
+/* En la parrilla el rótulo puede partirse en dos líneas
+   («ESTACIONAMIENTOS»); el icono se queda arriba, no centrado en el hueco. */
+.pd-dato .l { align-items: flex-start; }
+.pd-dato .l .ic-linea { margin-top: -1px; }
+@media (max-width: 520px) {
+  .pd-doc dt .ic-linea { width: 15px; height: 15px; flex: 0 0 15px; }
+}
+
+/* =============================================================
+   REVISIÓN AGOSTO 2026 · NOVENA VUELTA
+   ============================================================= */
+
+/* ---------- Los rótulos de sección son TÍTULOS ----------
+   Eran versalitas de 11 px con muchísimo tracking: no se veían. Pasan a la
+   voz de titular —Poppins Light, caja mixta, tamaño de verdad—, que es la
+   que tenían las frases que se retiraron. El guion verde se queda como
+   marca de sección y crece con la letra. */
+.mo-section-head .idx,
+.pd-areas-head .idx {
+  font-family: var(--font-serif); font-weight: 300;
+  font-size: clamp(26px, 3vw, 40px);
+  letter-spacing: -0.02em; text-transform: none;
+  line-height: 1.1;
+  color: var(--c-fg);
+  display: flex; align-items: baseline; gap: 18px;
+}
+.mo-section-head .idx::before {
+  width: 44px; height: 1px; flex: 0 0 44px;
+  transform: translateY(-0.35em);
+}
+.mo-section-head--centro .idx { justify-content: center; }
+.mo-section-head--pegada { margin-bottom: 34px; }
+
+/* ---------- Cabecera: la letra se quedó demasiado pequeña ---------- */
+.mo-nav-links a { font-size: 11.5px; letter-spacing: 0.16em; }
+
+/* ---------- Planos: el formulario a la altura del visor ----------
+   Arrancaba pegado al borde de arriba, o sea a la altura de los chips, y la
+   fila se veía desnivelada. `display: contents` deshace la caja del visor y
+   sus dos piezas —chips y lámina— entran directas en la retícula: los chips
+   a la fila 1 y la lámina a la 2, que es donde empieza también el
+   formulario. Sin números mágicos: si un proyecto no tiene chips, la fila 1
+   mide cero y siguen alineados. */
+@media (min-width: 1041px) {
+  .pd-planos-fila { grid-template-rows: auto 1fr; align-items: start; }
+  .pd-planos-visor { display: contents; }
+  .pd-planos-visor > .mo-chips { grid-column: 1; grid-row: 1; }
+  .pd-planos-visor > .pd-visor { grid-column: 1; grid-row: 2; }
+  .pd-planos-form { grid-column: 2; grid-row: 2; }
+}
+
+/* ---------- Galería en mosaico ----------
+   La rejilla de piezas iguales recortaba todos los renders al mismo 4/3 y se
+   veía como una hoja de contactos. En columnas cada foto entra con SU
+   proporción y se empaquetan sin huecos: es lo que la hace respirar. Sigue
+   sin scroll horizontal, que era el problema de origen. */
+.mc-gallery {
+  display: block;
+  column-count: 3; column-gap: 14px;
+  max-width: var(--max); margin: 0 auto; padding: 0 var(--pad-x);
+}
+.mc-gallery .item {
+  break-inside: avoid; -webkit-column-break-inside: avoid;
+  width: auto; height: auto; aspect-ratio: auto;
+  margin: 0 0 14px; display: block;
+  overflow: hidden;
+}
+.mc-gallery .item > img {
+  width: 100%; height: auto; display: block;
+  transition: transform 620ms var(--ease-out);
+}
+.mc-gallery .item:hover > img { transform: scale(1.035); }
+/* El velo solo aparece al pasar por encima: con la foto entera a la vista,
+   una banda oscura permanente en cada pieza ensuciaba el mosaico. */
+.mc-gallery .item::after { opacity: 0; transition: opacity 320ms var(--ease-out); }
+.mc-gallery .item .cap { opacity: 0; transition: opacity 320ms var(--ease-out); }
+.mc-gallery .item:hover::after,
+.mc-gallery .item:hover .cap,
+.mc-gallery .item:focus-within::after,
+.mc-gallery .item:focus-within .cap { opacity: 1; }
+@media (max-width: 1000px) { .mc-gallery { column-count: 2; } }
+@media (max-width: 620px)  { .mc-gallery { column-count: 1; } }
+/* En pantallas sin ratón no hay «pasar por encima»: el pie va siempre. */
+@media (hover: none) {
+  .mc-gallery .item::after, .mc-gallery .item .cap { opacity: 1; }
+}
+
+/* ---------- Décima vuelta ----------
+   La barra de filtros de planos se estiraba de lado a lado: al entrar en la
+   retícula como hija directa (display: contents en el visor) heredó el
+   `stretch` de la rejilla. Vuelve a medir lo que mide su contenido. */
+.pd-planos-visor > .mo-chips { justify-self: start; }
+
+/* El logotipo de la portada, un punto más pequeño. */
+.pd-hero-logo { height: clamp(78px, 12vw, 168px); }
+
+/* El botón de cambiar tema se retiró (la empresa eligió el claro). Su CSS y
+   el bloque :root[data-theme="oscuro"] se dejan por si hiciera falta volver,
+   pero ya no hay nada que los active. */
+.mo-tema { display: none; }
+
+/* ---------- Contacto · las dos sedes ----------
+   Rótulo en su propia línea y los dos marcadores en columna, cada uno junto
+   a su dirección. Como dos filas normales, el marcador de la primera subía a
+   la altura del rótulo y el de la segunda se quedaba en la del texto: los
+   alfileres salían descolocados entre sí. */
+.mk-hero-datos .mk-sedes {
+  grid-column: 1 / -1;
+  display: grid; grid-template-columns: 22px minmax(0, 1fr);
+  gap: 8px 14px; align-items: start;
+}
+.mk-sedes .l { grid-column: 2; }
+.mk-sedes .ic { grid-column: 1; width: 22px; height: 22px; color: rgba(var(--c-fg-rgb), 0.8); }
+.mk-sedes .ic svg { width: 22px; height: 22px; }
+.mk-sedes .v { grid-column: 2; font-size: 15px; line-height: 1.5; color: var(--c-fg); }
+
+/* =============================================================
+   REVISIÓN 11 DE AGOSTO · limpieza
+   ============================================================= */
+/* La foto de la tarjeta pasó de fondo CSS a <img>: hay que devolverle el
+   recorte que hacía `background-size: cover`. */
+.mo-card-img > img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.mo-card-img { background: var(--c-bg-deep); }
+
+/* El titular del grupo, un punto más pequeño que el resto de la página. */
+.qs-grupo .mo-section-head h2 { font-size: clamp(28px, 3.4vw, 46px); }
+
+/* «Déjanos tus datos» era un rótulo diminuto perdido encima del formulario;
+   ahora encabeza de verdad. Y los rótulos y marcadores de posición de los
+   campos subían tan claros que apenas se leían. */
+.mk-form > .mo-eyebrow {
+  font-family: var(--font-serif); font-weight: 300;
+  font-size: clamp(22px, 2.2vw, 30px);
+  letter-spacing: -0.01em; text-transform: none;
+  color: var(--c-fg);
+  margin-bottom: 6px;
+}
+.mk-field .lbl { color: rgba(var(--c-fg-rgb), 0.78); font-size: 11.5px; }
+.mk-field input, .mk-field select, .mk-field textarea { font-size: 16px; color: var(--c-fg); }
+.mk-field input::placeholder, .mk-field textarea::placeholder { color: rgba(var(--c-fg-rgb), 0.42); }
+.mk-actions .req, .mk-actions .fine { color: rgba(var(--c-fg-rgb), 0.68); }
+
+/* El «Ver proyecto» de la tarjeta fija `color: var(--c-bg)` para ganarle a
+   .mo-btn--solid, que sin eso lo dejaba negro sobre negro. Pero al pasar el
+   ratón el botón se vacía —fondo transparente— y ese mismo color fijo dejaba
+   la letra blanca sobre blanco. Al hover, tinta. */
+.mo-card-go.mo-btn:hover,
+.mo-card-go.mo-btn:focus-visible { color: var(--c-fg); }
+
+/* La marca de Eterna ya trae su nombre dibujado: en la ficha ocupa dos
+   líneas, así que necesita un poco más de alto que un logotipo apaisado. */
+.mp-entregados .marca img { max-height: 104px; }
+
+/* =============================================================
+   REVISIÓN 14 DE AGOSTO · EL MÓVIL
+   Tres avisos de la empresa, todos de la misma tarde:
+     «en el celular creo que no está adaptado»
+     «aparecen algunas imágenes y otras no»
+     «para celular se puede cambiar cómo se ve esto? tal vez como un
+      menú, porque parece que estuviese cortado»
+   ============================================================= */
+
+/* ---------- 1 · El hueco de una foto que todavía no llegó ----------
+   Era `--c-bg-deep`, que en el tema claro es un #F5F5F4: un rectángulo blanco
+   sobre fondo blanco. La empresa mandó capturas de eso y escribió «faltan las
+   fotos» —no faltaban, estaban bajando—. Con el hexágono de la casa al 6% el
+   hueco se lee como «aquí va una foto» y no como un error. Es un SVG escrito
+   en la propia hoja: ni una petición más, y nada que animar.
+   Solo va en las cajas cuya foto es un <img> ENCIMA: el <img>, al cargar, la
+   tapa entero. Las que llevan la foto como fondo (.mo-fondo) no pueden llevar
+   marca de agua —sería el mismo `background-image`— y se quedan con el color,
+   que ya basta para que no sea un rectángulo blanco. */
+.mo-card-img,
+.mc-gallery .item,
+.pd-carrusel-item {
+  background-color: rgba(var(--c-fg-rgb), 0.045);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 264'%3E%3Cpath d='M120 5 L229 67.5 L229 196.5 L120 259 L11 196.5 L11 67.5 Z' fill='none' stroke='%23000' stroke-opacity='.07' stroke-width='6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 84px auto;
+}
+/* En terreno oscuro —la portada y la cabecera de quiénes somos— el mismo
+   hexágono, pero en blanco: sobre la tinta el trazo negro no existe. El fondo
+   de estas dos NO se toca (ya es oscuro y es el que está pensado).
+   OJO con la portada: la marca va en `.mh-slider` y NO en `.mh-slide`. El
+   render de la lámina lleva `z-index: -2`, así que se pinta en la capa de
+   z negativos de `.mh-slider` —que es quien abre el contexto de apilado, con
+   su `isolation: isolate`—: por encima del fondo de ESE elemento, pero por
+   debajo del fondo de la lámina. Puesto en `.mh-slide`, el hexágono salía
+   dibujado ENCIMA del edificio. */
+.qs-hero-foto,
+.mh-slider {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 264'%3E%3Cpath d='M120 5 L229 67.5 L229 196.5 L120 259 L11 196.5 L11 67.5 Z' fill='none' stroke='%23fff' stroke-opacity='.09' stroke-width='6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 84px auto;
+}
+/* La foto del equipo en contacto entra sobre fondo claro. Aquí solo el color:
+   el hexágono no cabe, porque el `background-image` es la propia foto. */
+.mk-hero-img { background-color: rgba(var(--c-fg-rgb), 0.045); }
+
+/* ---------- 2 · Fotos de fondo, por ancho de pantalla ----------
+   Un `background-image` no admite `srcset`, así que al teléfono le llegaba
+   siempre la lámina de 2400 px. Aquí la plantilla deja los cuatro anchos en
+   variables y estas reglas eligen. Todas tienen la misma especificidad: manda
+   la ÚLTIMA que encaje, por eso van de la más ancha a la más estrecha y las
+   de densidad después. Y van DESPUÉS de la marca de agua de arriba a
+   propósito: si fueran antes, el hexágono le pisaría la foto.
+   Las de `min-resolution` suben un escalón en las pantallas que piden dos o
+   tres píxeles por cada uno de CSS: en un teléfono retina la de 640 se veía
+   blanda. */
+/* SOLO `background-image`: el encuadre de cada cabecera —ese `center 22%` que
+   costó afinar para que la cabeza entrara en el recorte— vive en sus propias
+   reglas y no hay que tocarlo desde aquí. */
+.mo-fondo { background-image: var(--foto-xl); }
+@media (max-width: 1700px) { .mo-fondo { background-image: var(--foto-l); } }
+@media (max-width: 1100px) { .mo-fondo { background-image: var(--foto-m); } }
+@media (max-width: 700px) { .mo-fondo { background-image: var(--foto-s); } }
+@media (max-width: 700px) and (min-resolution: 2dppx) { .mo-fondo { background-image: var(--foto-m); } }
+@media (min-width: 701px) and (max-width: 1100px) and (min-resolution: 2dppx) { .mo-fondo { background-image: var(--foto-l); } }
+@media (min-width: 1101px) and (min-resolution: 2dppx) { .mo-fondo { background-image: var(--foto-xl); } }
+
+/* ---------- 3 · Los filtros, como menú en el móvil ----------
+   Eran cuatro pastillas en una barra con scroll horizontal: en un teléfono
+   la cuarta caía fuera y la barra se veía cortada por la mitad de una
+   palabra, sin nada que dijera que aquello se arrastra. Ahora es un menú: un
+   botón con el filtro puesto y, al tocarlo, los cuatro en una lista.
+   La clase `is-menu` la pone site.js, no la plantilla: sin JS el menú no se
+   abriría, así que sin JS se queda la barra de siempre. */
+.mp-menu-btn { display: none; }
+
+@media (max-width: 720px) {
+  .mp-controls.is-menu {
+    position: relative;
+    display: flex; flex-direction: column; align-items: stretch; gap: 10px;
+  }
+  .mp-controls.is-menu .mp-menu-btn {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    width: 100%; padding: 15px 20px;
+    border: 1px solid var(--mo-line); border-radius: 999px;
+    background: transparent; color: var(--c-fg);
+    font-size: 11px; letter-spacing: 0.26em; text-transform: uppercase;
+    text-align: left; cursor: pointer;
+  }
+  .mp-controls.is-menu .mp-menu-btn .chev {
+    width: 9px; height: 9px; flex: 0 0 auto;
+    border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor;
+    transform: translateY(-2px) rotate(45deg);
+    transition: transform 240ms var(--ease-out);
+  }
+  .mp-controls.is-menu.is-open .mp-menu-btn .chev { transform: translateY(1px) rotate(-135deg); }
+
+  /* La lista flota sobre la rejilla en vez de empujarla: si empujara, al
+     abrir el menú las tarjetas darían un salto y se perdería el sitio. */
+  .mp-controls.is-menu .mp-tabs {
+    display: none;
+    position: absolute; top: calc(100% + 8px); left: 0; right: 0; z-index: 30;
+    flex-direction: column; gap: 2px;
+    padding: 8px; border-radius: 18px;
+    background: var(--c-bg);
+    border: 1px solid var(--mo-line);
+    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.16);
+    overflow: visible;
+  }
+  .mp-controls.is-menu.is-open .mp-tabs { display: flex; }
+  .mp-controls.is-menu .mp-tabs button {
+    width: 100%; text-align: left;
+    padding: 14px 16px; border-radius: 12px;
+    font-size: 11px;
+  }
+  .mp-controls.is-menu .mp-count { margin-left: 0; }
+}
+
+/* ---------- 4 · La caja de la foto no puede depender de la foto ----------
+   La empresa volvió a avisar: en su iPhone solo salían los edificios de las
+   DOS primeras tarjetas. En Chrome se veía perfecto y por eso se coló.
+
+   Es una diferencia real entre motores. `.mo-card-img` es una celda de una
+   retícula con `align-items: stretch`, así que su alto lo decide la FILA y no
+   su `aspect-ratio` —una vez el alto está determinado, la proporción ya no
+   pinta nada—. Y el alto de la fila sale de lo que mide su contenido: un
+   <img> que todavía no ha cargado mide CERO. Chrome resuelve la fila usando
+   la proporción; WebKit no, y deja la caja en 0×0 (medido: 350×262 en las dos
+   primeras, 0×0 en las cuatro siguientes).
+
+   De ahí el círculo vicioso: la caja mide cero → la foto nunca entra en
+   pantalla → `loading="lazy"` no la pide nunca → la caja sigue midiendo cero.
+   Las dos primeras se salvaban solo porque llevan `fetchpriority` y se piden
+   sin esperar a nada.
+
+   La proporción se le pone al PROPIO <img>, que es un elemento reemplazado y
+   se dimensiona solo, y se le quita el estirado a la celda. Así el hueco
+   existe antes de que llegue un solo byte. El <img> lleva además `width` y
+   `height` en el HTML: es la proporción de siempre, la que entienden todos
+   los motores incluso sin CSS. En escritorio no hace falta —ahí la caja tiene
+   `min-height: 296px` y nunca llegó a colapsar—, así que no se toca. */
+@media (max-width: 980px) {
+  .mo-card-img { align-self: start; }
+  .mo-card-img > img { aspect-ratio: 4 / 3; height: auto; }
+}
+
+/* Red de seguridad del mosaico: si alguna foto llegara sin medidas en la base
+   —hoy las 81 las tienen—, su pieza volvería a medir cero. Con esto cae en una
+   proporción razonable en vez de desaparecer. Solo aplica a las que NO traen
+   `width`, así que nunca le pisa la proporción real a ninguna. */
+.mc-gallery .item > img:not([width]) { aspect-ratio: 3 / 2; }
+
+/* La línea de tiempo se queda como estaba, y aquí está el porqué escrito para
+   que nadie lo vuelva a "arreglar":
+
+   El 20 de agosto se le forzó a la lámina `height: 220px` para que reservara
+   su hueco antes de cargar, como se hizo con las tarjetas. Fue un error y la
+   empresa lo vio el mismo día: los logotipos salían cortados por arriba.
+   `.obra` tiene `padding-bottom: 18px`, así que su caja de contenido mide 202
+   y no 220; con `align-items: flex-end` la lámina se apoyaba abajo y los 18 px
+   sobrantes se salían por ARRIBA —justo donde va el nombre de la obra—, y el
+   carrusel, que recorta lo que se sale, se los comía.
+
+   Aquí no hacía falta ninguna reserva: `.obra` ya tiene su `min-height`, así
+   que la ficha nunca se hunde y la lámina entra cuando llega. Que la imagen
+   mida 0×0 hasta entonces es inofensivo: no arrastra a nada. La reserva de
+   hueco es obligatoria donde el alto de la CAJA depende de la imagen —las
+   tarjetas, la galería—, no donde la caja ya tiene el suyo. */
+
+/* El visor de planos: la lámina se dimensionaba con `width:auto; height:auto`,
+   o sea a partir de la propia foto, y hasta que cargaba medía 0×0. La caja
+   blanca tiene alto reservado y no se hundía, pero el plano —que ES el
+   contenido de la sección— aparecía de golpe.
+   Con el ancho definido y `contain`, la proporción sale de los atributos
+   `width`/`height` que ahora lleva el <img> (medidas reales de la tabla
+   `images`) y el hueco existe desde el primer momento. El dibujo se ve
+   exactamente igual: `contain` respeta su proporción dentro de la caja. */
+.pd-visor-lienzo img {
+  width: 100%; height: auto; max-height: 520px;
+  object-fit: contain;
+}
+@media (max-width: 980px) {
+  .pd-visor-lienzo img { max-height: 300px; }
+}
