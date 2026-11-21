@@ -10,3 +10,13 @@ desktop.ini
 .vscode/
 .idea/
 *.swp
+
+# Documentación de instrucciones y revisiones (no se publican en Pages)
+*.md
+
+# Temporales, cachés y registros
+*.log
+*.tmp
+.cache/
+.env
+.env.*
