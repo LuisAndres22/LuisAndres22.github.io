@@ -4,80 +4,26 @@
    Source: RyR_Brandboard.pdf · Andrearts Branding Studio · 2026
    ============================================================= */
 
-/* ---------- Tipografías de marca (documento de agosto 2026) ----------
-   La empresa pidió «letras más sencillas»:
-     LETRA          → Montserrat ExtraBold   (mayúsculas, botones, cifras)
-     LETRA / letra  → Poppins Light          (titulares y texto corrido)
-     Letra          → Alga Light             (cursivas editoriales)
-
-   Raleway y Unbounded quedan fuera. Los archivos son ESTÁTICOS, no
-   variables: cada @font-face declara su peso REAL. Declararlos con un
-   rango 100–900 hacía que el navegador diera por cubierto todo el rango
-   y nunca sintetizara negrita (los botones en bold salían igual de finos).
-   Montserrat se instanció a peso 800 desde el variable oficial y los tres
-   archivos van subconjuntados a latín, así que pesan ~19–89 kB.
+/* ---------- Tipografía de marca: Montserrat (manual R+A, 2026) ----------
+   El manual fija Montserrat para títulos y textos: Bold/SemiBold en
+   negrita para nombres y titulares, y la misma familia en normal para
+   descripciones. Es la variable oficial subconjuntada a latín: un archivo
+   cubre los pesos 100–900 y su cursiva, así que pesa ~37 kB y no hay
+   síntesis de negrita. Poppins, Lato y Alga quedan fuera del sitio.
    ---------- */
 @font-face {
-  font-family: "Poppins";
-  font-weight: 300;
+  font-family: "Montserrat";
+  font-weight: 100 900;
   font-style: normal;
   font-display: swap;
-  src: url("/fonts/Poppins-Light.woff2") format("woff2"),
-       url("/fonts/Poppins-Light.ttf") format("truetype");
-}
-@font-face {
-  font-family: "Poppins";
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-  src: url("/fonts/Poppins-Regular.woff2") format("woff2"),
-       url("/fonts/Poppins-Regular.ttf") format("truetype");
+  src: url("/fonts/Montserrat-Variable.woff2") format("woff2");
 }
 @font-face {
   font-family: "Montserrat";
-  font-weight: 800;
-  font-style: normal;
-  font-display: swap;
-  src: url("/fonts/Montserrat-ExtraBold.woff2") format("woff2"),
-       url("/fonts/Montserrat-ExtraBold.ttf") format("truetype");
-}
-/* Lato Regular 400 + su cursiva. La empresa la señaló con un espécimen del
-   precio de Moratta («262,115») escrito en esta letra: es la voz de las
-   CIFRAS —metraje, dormitorios, precio, años, contadores—, que en Montserrat
-   ExtraBold salían como un ladrillo. Los botones y los rótulos en versalita
-   siguen en Montserrat, que es lo que pidió el documento («botones en
-   negrita»). Ambos archivos van subconjuntados a latín (~100 kB). */
-@font-face {
-  font-family: "Lato";
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-  src: url("/fonts/Lato-Regular.woff2") format("woff2"),
-       url("/fonts/Lato-Regular.ttf") format("truetype");
-}
-@font-face {
-  font-family: "Lato";
-  font-weight: 400;
+  font-weight: 100 900;
   font-style: italic;
   font-display: swap;
-  src: url("/fonts/Lato-Italic.woff2") format("woff2"),
-       url("/fonts/Lato-Italic.ttf") format("truetype");
-}
-@font-face {
-  font-family: "Alga";
-  font-weight: 200;
-  font-style: italic;
-  font-display: swap;
-  src: url("/fonts/Alga-ExtralightItalic.woff2") format("woff2"),
-       url("/fonts/Alga-ExtralightItalic.ttf") format("truetype");
-}
-@font-face {
-  font-family: "Alga";
-  font-weight: 200;
-  font-style: normal;
-  font-display: swap;
-  src: url("/fonts/Alga-ExtralightItalic.woff2") format("woff2"),
-       url("/fonts/Alga-ExtralightItalic.ttf") format("truetype");
+  src: url("/fonts/Montserrat-Italic-Variable.woff2") format("woff2");
 }
 
 :root {
@@ -137,29 +83,23 @@
   --rule:          #E6E6E6;
 
   /* -----------------------------------------------------------
-     TYPE — Four families per brandboard.
-     · Raleway Light       → body, UI, captions
-     · Unbounded Light     → display sans, project marks, eyebrows
-     · "Sharpe" Thin       → serif headings (substitute: Fraunces)
-     · Alga XLight Italic  → editorial italic flourishes (licensed)
-     ----------------------------------------------------------- */
+      TYPE — Single family per brandboard: Montserrat (incluida su cursiva),
+      montada desde la variable oficial en un @font-face de rango 100–900.
+      ----------------------------------------------------------- */
 
-  --font-sans:        "Poppins", "Helvetica Neue", Arial, sans-serif;
+  --font-sans:        "Montserrat", "Helvetica Neue", Arial, sans-serif;
   /* --font-display es la voz en MAYÚSCULAS: eyebrows, botones, rótulos y
-     cifras. Va en Montserrat ExtraBold, que es el único peso cargado: no
-     tiene sentido pedirle 300 porque el navegador usaría igual el de 800.
-     Los rótulos pequeños en versalitas usan --font-sans a peso 400. */
+     cifras. Todos los pesos de Montserrat (variable) ya van de 100 a 900,
+     así que el navegador instancia Bold o SemiBold directamente. */
   --font-display:     "Montserrat", "Helvetica Neue", Arial, sans-serif;
-  /* Los titulares mixtos van en Poppins Light —«LETRA / letra» del
-     documento—; la cursiva editorial sigue siendo Alga, que sí es de marca.
-     El token conserva el nombre histórico --font-serif para no tocar las
-     ~200 reglas que ya lo usan. */
-  --font-serif:       "Poppins", "Helvetica Neue", Arial, sans-serif;
-  --font-serif-ital:  "Alga", Georgia, serif;
-  /* Las CIFRAS. Ver el @font-face de Lato: la empresa la eligió mostrando el
-     precio de Moratta escrito con ella. tabular-nums para que las columnas
-     de metraje y precio de las siete tarjetas queden a plomo. */
-  --font-num:         "Lato", "Helvetica Neue", Arial, sans-serif;
+  /* Titulares mixtos y cursiva editorial con la variable Montserrat. El
+     token conserva el nombre histórico --font-serif para no tocar las ~200
+     reglas que ya lo usan. */
+  --font-serif:       "Montserrat", "Helvetica Neue", Arial, sans-serif;
+  --font-serif-ital:  "Montserrat", Georgia, serif;
+  /* Las CIFRAS: Montserrat sobre la variable, con tabular-nums para que las
+     columnas de metraje y precio de las tarjetas queden a plomo. */
+  --font-num:         "Montserrat", "Helvetica Neue", Arial, sans-serif;
 
   /* Weight tokens — note: brand strongly favors LIGHT weights */
   --w-thin:    300;
@@ -235,10 +175,10 @@
   --grid-gutter: var(--s-6);
 
   /* Tokens adicionales por proyecto (fichas y tarjetas) */
-  --proyecto-safiro-dark: #0D3459;
-  --proyecto-safiro-main: #1867A9;
-  --proyecto-safiro-light: #53A5E0;
-  --proyecto-safiro-muted: #B3BDC6;
+  --proyecto-safiro-dark: #042B53;
+  --proyecto-safiro-main: #1169AB;
+  --proyecto-safiro-light: #56ACE3;
+  --proyecto-safiro-muted: #ADBAC7;
 
   --proyecto-vallereal-main: #6C8D2B;
   --proyecto-vallereal-accent: #E6B83A;
@@ -645,6 +585,10 @@ input, textarea, select { font: inherit; color: inherit; }
 }
 .mo-section-head h2 em { font-family: var(--font-serif-ital); font-style: italic; font-weight: 300; }
 .mo-section-head p { font-size: 16px; line-height: 1.55; color: var(--mo-text-muted); max-width: 560px; margin: 0; }
+
+.mo-vision { max-width: 1080px; margin: 0 auto; padding: 8px var(--pad-x) 0; }
+.mo-vision p { margin: 0 0 28px; font-family: var(--font-serif); font-weight: 300; font-size: 21px; line-height: 1.7; color: var(--mo-text); }
+.mo-vision p:first-child { font-family: var(--font-serif-ital); font-style: italic; font-weight: 300; font-size: 26px; line-height: 1.5; }
 @media (max-width: 880px) { .mo-section { padding: 80px var(--pad-x); } }
 
 /* =============================================================
