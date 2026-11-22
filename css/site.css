@@ -56,7 +56,7 @@
   --ryr-ink-950:      #141413;   /* alias of --ryr-ink                  */
 
   /* Editorial accent — Azul Safiro Cielo, con moderación */
-  --ryr-sky:          #53A5E0;
+  --ryr-sky:          #2E6FB0;
 
   /* -----------------------------------------------------------
      DORADO DE MARCA — acento del manual R+A (#C59B43). Se usa en
@@ -175,10 +175,10 @@
   --grid-gutter: var(--s-6);
 
   /* Tokens adicionales por proyecto (fichas y tarjetas) */
-  --proyecto-safiro-dark: #042B53;
-  --proyecto-safiro-main: #1169AB;
-  --proyecto-safiro-light: #56ACE3;
-  --proyecto-safiro-muted: #ADBAC7;
+  --proyecto-safiro-dark: #041E42;
+  --proyecto-safiro-main: #0B3D91;
+  --proyecto-safiro-light: #2E7CC4;
+  --proyecto-safiro-muted: #6B8FA8;
 
   --proyecto-vallereal-main: #6C8D2B;
   --proyecto-vallereal-accent: #E6B83A;
@@ -2146,7 +2146,7 @@ html.sin-scroll, html.sin-scroll body { overflow: hidden; }
 .qs-pilares, .qs-valores, .qs-grupo {
   max-width: var(--max); margin: 0 auto; padding: 0 var(--pad-x) 96px;
 }
-.qs-pilares-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--mo-line); }
+.qs-pilares-grid { display: grid; grid-template-columns: 1fr; gap: 0; border-top: 1px solid var(--mo-line); }
 .qs-pilares-grid article {
   padding: 34px 30px 40px;
   border-right: 1px solid var(--mo-line); border-bottom: 1px solid var(--mo-line);
