@@ -9,6 +9,8 @@ archivos.
 > R+A. La estructura, las clases y los scripts no dependen de la marca, así que
 > sirve también como plantilla para otra inmobiliaria (ver `REBRANDING.md`).
 
+**Sitio publicado (GitHub Pages):** https://luisandres22.github.io/
+
 ---
 
 ## Inicio rápido
