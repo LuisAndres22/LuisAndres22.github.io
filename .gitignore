@@ -13,6 +13,8 @@ desktop.ini
 
 # Documentación de instrucciones y revisiones (no se publican en Pages)
 *.md
+# ...salvo el README del repositorio
+!README.md
 
 # Temporales, cachés y registros
 *.log
