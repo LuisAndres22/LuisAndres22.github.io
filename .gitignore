@@ -22,3 +22,9 @@ desktop.ini
 .cache/
 .env
 .env.*
+
+# Uploads desechados (archivos antiguos que ya no se usan)
+uploads/**/*.jpg
+uploads/**/*.png
+!uploads/proyectos/
+!uploads/ryd-equipo-*.jpg

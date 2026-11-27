@@ -64,7 +64,8 @@ d.setAttribute('data-theme','claro');})();</script>
 
 <section class="rc-body">
   
-  <form class="rc-card" method="post" action="/libro-de-reclamaciones">
+  <form class="rc-card" id="rc-form" method="POST" action="https://formspree.io/f/moedbrzd">
+    <input type="hidden" name="_subject" value="Nuevo Reclamo/Queja - Libro de Reclamaciones - R+A Inmobiliaria">
     
 
     <div class="rc-top">
@@ -139,6 +140,7 @@ d.setAttribute('data-theme','claro');})();</script>
     <div class="mk-actions">
       <button class="mo-btn mo-btn--solid" type="submit">Enviar reclamación <span class="arr"></span></button>
     </div>
+    <p class="mk-form-nota" id="rc-form-nota" role="status" aria-live="polite" style="display: none; margin: 18px 0 0; line-height: 1.6;"></p>
   </form>
   
 </section>
@@ -231,6 +233,49 @@ d.setAttribute('data-theme','claro');})();</script>
 
 <script src="/js/site.js?v=1795301495356" defer></script>
 <script src="/js/motion.js?v=1795301495356" defer></script>
+
+<script>
+/* ---------- Libro de Reclamaciones con Formspree (AJAX) ---------- */
+(function () {
+  var form = document.getElementById('rc-form');
+  if (!form) return;
+  var nota = document.getElementById('rc-form-nota');
+
+  function mostrarNota(texto, esError) {
+    if (!nota) return;
+    nota.textContent = texto;
+    nota.style.color = esError ? '#d9534f' : '#5cb85c';
+    nota.style.display = 'block';
+  }
+
+  form.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    
+    var data = new FormData(form);
+    
+    fetch(form.action, {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    }).then(function (response) {
+      if (response.ok) {
+        mostrarNota('¡Reclamación enviada con éxito! Hemos registrado tu reclamo y nos pondremos en contacto.');
+        form.reset();
+      } else {
+        response.json().then(function (data) {
+          if (data.errors) {
+            mostrarNota('Error: ' + data.errors.map(function(e){return e.message}).join(', '), true);
+          } else {
+            mostrarNota('Ocurrió un error al enviar el reclamo. Inténtalo de nuevo.', true);
+          }
+        });
+      }
+    }).catch(function () {
+      mostrarNota('Error de conexión. Revisa tu internet.', true);
+    });
+  });
+})();
+</script>
 
 </body>
 </html>
